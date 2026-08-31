@@ -50,6 +50,7 @@ function Header() {
                 {link.label}
               </a>
             ))}
+            <a href="#" className="btn btn-primary mobile-portal-btn" onClick={closeNav}>Student Portal</a>
           </nav>
 
           <div className="nav-right">
