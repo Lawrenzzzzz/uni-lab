@@ -125,8 +125,8 @@
 
 .unilab-site .departments{background:var(--navy-950);}
 .unilab-site .departments .section-head .eyebrow{color:var(--amber-500);}
-.unilab-site .departments .section-head h2{color:#fff;}
-.unilab-site .departments .section-head p{color:rgba(255,255,255,.6);}
+.unilab-site .departments .section-head h2{color:#fff; text-align: left; }
+.unilab-site .departments .section-head p{color:rgba(255,255,255,.6); text-align: left;}
 .unilab-site .dept-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:28px;}
 .unilab-site .dept-card{
   background:var(--navy-900); border:1px solid var(--navy-700); overflow:hidden;

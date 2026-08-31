@@ -123,8 +123,8 @@ function Services() {
     <section className="services" id="services">
       <div className="wrap">
         <div className="section-head">
-          <p className="eyebrow">Student Utilities</p>
-          <h2>Essential Campus Services</h2>
+          <p className="eyebrow">What is UNI-Lab?</p>
+          <h2>University - <span style={{fontStyle: 'italic'}}>Learning Academic Bridge</span></h2>
         </div>
         <div className="service-grid">
           {SERVICES.map((s, i) => (
@@ -157,9 +157,9 @@ function Departments() {
     <section className="departments" id="departments">
       <div className="wrap">
         <div className="section-head">
-          <p className="eyebrow">Areas of Study</p>
-          <h2>Featured Departments &amp; Facilities</h2>
-          <p>Oakridge excels at merging classical humanities research with progressive technology incubation.</p>
+          <p className="eyebrow">Contacts</p>
+          <h2>Inquiries</h2>
+          <p>If you are interested in using this platform just email us!</p>
         </div>
         <div className="dept-grid">
           {DEPARTMENTS.map((d, i) => (
