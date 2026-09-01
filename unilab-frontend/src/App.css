@@ -428,3 +428,521 @@
     height: 300px !important;
   }
 }
+
+/* ---------- Email Modal Styles ---------- */
+.unilab-site .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+.unilab-site .modal-content {
+  background: var(--navy-900);
+  border-radius: 16px;
+  padding: 35px;
+  max-width: 550px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  border: 1px solid var(--navy-700);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  animation: slideUp 0.35s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.unilab-site .modal-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 28px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.unilab-site .modal-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transform: rotate(90deg);
+  border-color: var(--amber-500);
+}
+
+.unilab-site .modal-header {
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.unilab-site .modal-header h3 {
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.unilab-site .modal-header h3::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 2px;
+  background: var(--amber-500);
+  margin: 10px auto 0;
+}
+
+.unilab-site .modal-header p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  margin-top: 12px;
+  
+}
+
+/* Email Form */
+.unilab-site .email-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.unilab-site .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.unilab-site .form-group label {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-family: 'Space Mono', monospace;
+  text-align: left;
+  margin-left: 15px;
+}
+
+.unilab-site .form-group input,
+.unilab-site .form-group textarea {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--navy-700);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #fff;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+}
+
+.unilab-site .form-group input:focus,
+.unilab-site .form-group textarea:focus {
+  border-color: var(--amber-500);
+  box-shadow: 0 0 0 3px rgba(242, 168, 62, 0.15);
+}
+
+.unilab-site .form-group input::placeholder,
+.unilab-site .form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.unilab-site .form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.unilab-site .submit-btn {
+  width: 100%;
+  justify-content: center;
+  margin-top: 8px;
+  padding: 14px;
+  font-size: 15px;
+}
+
+/* ---------- Success Toast ---------- */
+.unilab-site .success-toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--navy-900);
+  border: 1px solid var(--amber-500);
+  border-radius: 12px;
+  padding: 20px 30px;
+  max-width: 450px;
+  width: 90%;
+  z-index: 2000;
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.unilab-site .success-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.unilab-site .toast-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.unilab-site .toast-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.unilab-site .toast-content h4 {
+  color: var(--amber-500);
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  margin: 0 0 4px 0;
+}
+
+.unilab-site .toast-content p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+  margin: 0;
+}
+
+/* Mobile responsive for email modal */
+@media (max-width: 600px) {
+  .unilab-site .modal-content {
+    padding: 24px 18px;
+    margin: 10px;
+    border-radius: 12px;
+  }
+
+  .unilab-site .modal-header h3 {
+    font-size: 20px;
+  }
+
+  .unilab-site .modal-close {
+    font-size: 22px;
+    width: 34px;
+    height: 34px;
+    top: 10px;
+    right: 12px;
+  }
+
+  .unilab-site .success-toast {
+    padding: 16px 20px;
+    bottom: 20px;
+  }
+
+  .unilab-site .toast-content h4 {
+    font-size: 16px;
+  }
+
+  .unilab-site .toast-content p {
+    font-size: 12px;
+  }
+}
+
+/* ---------- Review Modal Styles ---------- */
+.unilab-site .review-modal {
+  max-width: 650px;
+}
+
+.unilab-site .star-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  flex-wrap: wrap;
+}
+
+.unilab-site .rating-label {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  margin-left: 8px;
+  font-family: 'Inter', sans-serif;
+  min-width: 80px;
+}
+
+/* Reviews Section */
+.unilab-site .reviews-section {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--navy-700);
+}
+
+.unilab-site .reviews-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.unilab-site .reviews-header h4 {
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  margin: 0;
+}
+
+.unilab-site .review-count {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  font-family: 'Space Mono', monospace;
+}
+
+.unilab-site .reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.unilab-site .reviews-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.unilab-site .reviews-list::-webkit-scrollbar-track {
+  background: var(--navy-800);
+  border-radius: 4px;
+}
+
+.unilab-site .reviews-list::-webkit-scrollbar-thumb {
+  background: var(--amber-500);
+  border-radius: 4px;
+}
+
+.unilab-site .review-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--navy-700);
+  border-radius: 10px;
+  padding: 16px 18px;
+  transition: border-color 0.3s ease;
+}
+
+.unilab-site .review-item:hover {
+  border-color: rgba(242, 168, 62, 0.3);
+}
+
+.unilab-site .review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.unilab-site .reviewer-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.unilab-site .reviewer-name {
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.unilab-site .review-date {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 11px;
+  font-family: 'Space Mono', monospace;
+}
+
+.unilab-site .review-stars {
+  display: flex;
+  gap: 2px;
+}
+
+.unilab-site .review-comment {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.unilab-site .no-reviews {
+  color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* Mobile responsive for review modal */
+@media (max-width: 600px) {
+  .unilab-site .review-modal {
+    padding: 20px 16px;
+  }
+  
+  .unilab-site .star-rating {
+    gap: 4px;
+  }
+  
+  .unilab-site .star-rating svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+  
+  .unilab-site .review-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .unilab-site .reviews-list {
+    max-height: 200px;
+  }
+}
+
+/* ---------- NEW: White/Formal Theme for Email & Review Modals ---------- */
+/* Override dark navy background with white */
+.unilab-site .email-modal,
+.unilab-site .review-modal {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
+}
+
+.unilab-site .email-modal .modal-header h3,
+.unilab-site .review-modal .modal-header h3 {
+  color: var(--ink-900);
+}
+
+.unilab-site .email-modal .modal-header h3::after,
+.unilab-site .review-modal .modal-header h3::after {
+  background: var(--amber-500);
+}
+
+.unilab-site .email-modal .modal-header p,
+.unilab-site .review-modal .modal-header p {
+  color: var(--ink-600);
+}
+
+.unilab-site .email-modal .modal-close,
+.unilab-site .review-modal .modal-close {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid #d1d5db;
+  color: #6b7280;
+}
+
+.unilab-site .email-modal .modal-close:hover,
+.unilab-site .review-modal .modal-close:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: #1f2937;
+  border-color: var(--amber-500);
+}
+
+/* Form labels and inputs - white theme */
+.unilab-site .email-modal .form-group label,
+.unilab-site .review-modal .form-group label {
+  color: var(--ink-900);
+}
+
+.unilab-site .email-modal .form-group input,
+.unilab-site .email-modal .form-group textarea,
+.unilab-site .review-modal .form-group input,
+.unilab-site .review-modal .form-group textarea {
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
+  color: var(--ink-900);
+}
+
+.unilab-site .email-modal .form-group input:focus,
+.unilab-site .email-modal .form-group textarea:focus,
+.unilab-site .review-modal .form-group input:focus,
+.unilab-site .review-modal .form-group textarea:focus {
+  border-color: var(--amber-500);
+  box-shadow: 0 0 0 3px rgba(242, 168, 62, 0.2);
+}
+
+.unilab-site .email-modal .form-group input::placeholder,
+.unilab-site .email-modal .form-group textarea::placeholder,
+.unilab-site .review-modal .form-group input::placeholder,
+.unilab-site .review-modal .form-group textarea::placeholder {
+  color: #9ca3af;
+}
+
+/* Review specific - star rating label */
+.unilab-site .review-modal .rating-label {
+  color: var(--ink-600);
+}
+
+/* Reviews section - white theme */
+.unilab-site .review-modal .reviews-section {
+  border-top-color: #e5e7eb;
+}
+
+.unilab-site .review-modal .reviews-header h4 {
+  color: var(--ink-900);
+}
+
+.unilab-site .review-modal .review-count {
+  color: var(--ink-400);
+}
+
+.unilab-site .review-modal .review-item {
+  background: #f9fafb;
+  border-color: #e5e7eb;
+}
+
+.unilab-site .review-modal .review-item:hover {
+  border-color: var(--amber-500);
+}
+
+.unilab-site .review-modal .reviewer-name {
+  color: var(--ink-900);
+}
+
+.unilab-site .review-modal .review-date {
+  color: var(--ink-400);
+}
+
+.unilab-site .review-modal .review-comment {
+  color: var(--ink-600);
+}
+
+.unilab-site .review-modal .no-reviews {
+  color: var(--ink-400);
+}
+
+/* Scrollbar for reviews list - white theme */
+.unilab-site .review-modal .reviews-list::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+.unilab-site .review-modal .reviews-list::-webkit-scrollbar-thumb {
+  background: var(--amber-500);
+}
+
+/* Success toast - white theme */
+.unilab-site .success-toast {
+  background: #ffffff;
+  border: 1px solid var(--amber-500);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+.unilab-site .success-toast .toast-content h4 {
+  color: var(--amber-600);
+}
+
+.unilab-site .success-toast .toast-content p {
+  color: var(--ink-600);
+}
