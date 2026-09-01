@@ -11,9 +11,9 @@ export const NAV_LINKS = [
 
 export const SERVICES = [
   {
-    title: "Registrar & Grades",
-    body: "View academic transcripts, structural credit updates, register for upcoming terms, and manage tuition schedules.",
-    details: "Log in with your student ID to pull real-time GPA calculations, download official transcripts as PDFs, and lock in your course schedule before add/drop deadlines close.",
+    title: "UNI-Lab",
+    body: "Uni-Lab is a college portal designed to provide students and faculty with a centralized platform for managing academic information and accessing essential university services. ",
+    details: "It aims to simplify academic processes, improve communication, and provide a more convenient digital experience for the university community.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M22 10L12 5 2 10l10 5 10-5Z" />
@@ -22,9 +22,9 @@ export const SERVICES = [
     ),
   },
   {
-    title: "Digital Library",
-    body: "Access over 450,000 academic journals, peer-reviewed articles, reserve study pods, and query expert research librarians.",
-    details: "Log in with your student ID to pull real-time GPA calculations, download official transcripts as PDFs, and lock in your course schedule before add/drop deadlines close.",
+    title: "Schedule Maker",
+    body: "Just Upload your Schedule and UNI-Lab will generate a clean easy to understand Schedule",
+    details: "Some Students/ Faculty Members is having hard time to create a schedule since it's time consuming, with this you're just going to upload the text or img file and UNI-Lab will do the work for you",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
@@ -33,9 +33,9 @@ export const SERVICES = [
     ),
   },
   {
-    title: "Admissions Hub",
-    body: "Submit critical transfer paperwork, track application lifecycles, and check scholarship eligibility status.",
-    details: "Log in with your student ID to pull real-time GPA calculations, download official transcripts as PDFs, and lock in your course schedule before add/drop deadlines close.",
+    title: "Attendance Tracking",
+    body: "The Attendance Tracking for this website uses QR Code so no need to do roll each time you have a class just scan your QR code and you will be present",
+    details: "With UNI-Lab you can track attendance real-time and make calculation and assesment based on the input that the students give, it will generate report for the attendance of each student. For example: one student reaches 3 absences which is the limit it will notify you so that you can take action",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
@@ -45,9 +45,9 @@ export const SERVICES = [
     ),
   },
   {
-    title: "Campus Calendar",
-    body: "Never miss lectures, academic symposia, midterms, or major campus athletic events.",
-    details: "Log in with your student ID to pull real-time GPA calculations, download official transcripts as PDFs, and lock in your course schedule before add/drop deadlines close.",
+    title: "Announcements",
+    body: "With UNI-Lab you can make announcement like Exam, Quizzes, Events, Activities real-time",
+    details: "UNI-Lab keep students and faculty updated with the latest university news, events, important reminders, and academic updates, all in one convenient place. ",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <rect x="3" y="4" width="18" height="18" rx="2" />

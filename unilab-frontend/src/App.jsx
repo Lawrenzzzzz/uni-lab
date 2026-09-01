@@ -129,7 +129,7 @@ function Services() {
       <div className="wrap">
 
         <div className="section-head">
-          <p className="eyebrow">What is UNI-Lab?</p>
+          <p className="eyebrow">What is UNI-Lab and It's Main Function?</p>
 
           <h2>
             University -{" "}
