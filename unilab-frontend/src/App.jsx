@@ -254,12 +254,15 @@ function MapPopup({ isOpen, onClose }) {
 
 function EmailModal({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
-    to: '',
+    name: '',
+    email: '',
     cc: '',
     subject: '',
     message: ''
   });
   const [showSuccess, setShowSuccess] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [sending, setSending] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -268,25 +271,32 @@ function EmailModal({ isOpen, onClose }) {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Email submitted:', formData);
-    
-    // Show success toast
-    setShowSuccess(true);
-    
-    // Reset form
-    setFormData({
-      to: '',
-      from: '',
-      subject: '',
-      message: ''
-    });
-    
-    // Hide success toast after 3 seconds
-    setTimeout(() => {
-      setShowSuccess(false);
-    }, 3000);
+    setErrorMsg('');
+    setSending(true);
+
+    try {
+      const res = await fetch('http://localhost:8000/api/contact/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Something went wrong.');
+      }
+
+      setShowSuccess(true);
+      setFormData({ name: '', email: '', cc: '', subject: '', message: '' });
+      setTimeout(() => setShowSuccess(false), 3000);
+    } catch (err) {
+      setErrorMsg(err.message || 'Failed to send. Please try again.');
+    } finally {
+      setSending(false);
+    }
   };
 
   if (!isOpen) return null;
@@ -295,7 +305,7 @@ function EmailModal({ isOpen, onClose }) {
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content email-modal" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close" onClick={onClose}>×</button>
-        
+
         <div className="modal-header">
           <h3>📧 Send us an Email</h3>
           <p>We'll get back to you as soon as possible</p>
@@ -303,13 +313,25 @@ function EmailModal({ isOpen, onClose }) {
 
         <form onSubmit={handleSubmit} className="email-form">
           <div className="form-group">
-            <label htmlFor="to">To</label>
+            <label htmlFor="name">Your Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Juan Dela Cruz"
+              value={formData.name}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="email">Your Email</label>
             <input
               type="email"
-              id="to"
-              name="to"
-              placeholder="recipient@example.com"
-              value={formData.to}
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              value={formData.email}
               onChange={handleChange}
               required
             />
@@ -353,19 +375,22 @@ function EmailModal({ isOpen, onClose }) {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary submit-btn">
-            Send Message ✉️
+          {errorMsg && (
+            <p style={{ color: '#e0932a', fontSize: '13px', margin: 0 }}>{errorMsg}</p>
+          )}
+
+          <button type="submit" className="btn btn-primary submit-btn" disabled={sending}>
+            {sending ? 'Sending...' : 'Send Message ✉️'}
           </button>
         </form>
       </div>
 
-      {/* Success Toast */}
       <div className={`success-toast${showSuccess ? ' show' : ''}`}>
         <div className="toast-content">
           <span className="toast-icon">✅</span>
           <div>
-            <h4>Stay tuned!</h4>
-            <p>Subscribe our newsletter and get notifications to stay update</p>
+            <h4>Message sent!</h4>
+            <p>Thanks for reaching out — we'll reply to your email soon.</p>
           </div>
         </div>
       </div>
