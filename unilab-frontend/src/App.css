@@ -67,6 +67,7 @@
 .unilab-site header.scrolled{background:var(--navy-950); padding:14px 0; box-shadow:0 8px 24px rgba(0,0,0,.25);}
 .unilab-site .nav-inner{display:flex; align-items:center; justify-content:space-between; gap:24px;}
 .unilab-site .brand{display:flex; align-items:center; gap:10px; color:#fff;}
+
 .unilab-site .brand-word{font-family:'Space Mono',monospace;font-size:15px;letter-spacing:.14em;font-weight:700;}
 .unilab-site nav.links{display:flex; align-items:center; gap:36px;}
 .unilab-site nav.links a{color:rgba(255,255,255,.82); font-size:14px; font-weight:500; position:relative; padding:4px 0; transition:color .3s var(--ease-fast);}
@@ -101,7 +102,7 @@
     rgba(5, 14, 30, 0.55);
   z-index:1;
 }
-.unilab-site .hero-content{position:relative; z-index:2; padding:90px 0 60px; max-width:760px;}
+.unilab-site .hero-content{position:relative; z-index:2; padding:90px 0 60px; max-width:760px; margin-left: 170px; text-align: left;}
 .unilab-site .hero-content .eyebrow{color:var(--amber-500); margin-bottom:22px;}
 .unilab-site .hero h1{color:#fff; font-size:clamp(38px, 5.4vw, 68px); line-height:1.06; font-weight:600; margin-bottom:26px;}
 .unilab-site .hero h1 em{font-style:italic; color:var(--amber-500);}
