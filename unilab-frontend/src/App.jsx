@@ -242,7 +242,7 @@ function MapPopup({ isOpen, onClose }) {
             <Popup>UNI-Lab - Balayan, Batangas</Popup>
           </Marker>
         </MapContainer>
-        <p className="map-popup-address">📍 220 College Hill Road, Balayan, Batangas</p>
+        <p className="map-popup-address">Balayan, Batangas</p>
       </div>
     </div>
   );
