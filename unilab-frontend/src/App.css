@@ -1,27 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 
-
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px; /* Space between logo and text */
-  text-decoration: none;
-}
-
-.brand-logo {
-  height: 40px; /* Adjust size as needed */
-  width: auto;
-  display: block;
-}
-
-.brand-word {
-  font-size: 1.2rem;
-  font-weight: bold;
-  /* Keep any existing styles you have */
-}
-
-.unilab-site{
+.unilab-site {
   --navy-950:#081326; --navy-900:#0b1b3a; --navy-800:#13294f; --navy-700:#1c3a68;
   --amber-500:#f2a83e; --amber-600:#e0932a;
   --paper:#f7f7f4; --paper-card:#ffffff;
@@ -42,6 +21,9 @@
   font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.16em;
   text-transform:uppercase; display:flex; align-items:center; gap:8px; font-weight:700;
 }
+
+
+
 .unilab-site .eyebrow::before{content:"";width:14px;height:2px;background:var(--amber-500);display:inline-block;}
 .unilab-site h1,.unilab-site h2,.unilab-site h3{font-family:'Playfair Display',serif;margin:0;letter-spacing:-.01em;}
 .unilab-site .wrap{max-width:1240px;margin:0 auto;padding:0 40px;}
@@ -66,7 +48,17 @@
 }
 .unilab-site header.scrolled{background:var(--navy-950); padding:14px 0; box-shadow:0 8px 24px rgba(0,0,0,.25);}
 .unilab-site .nav-inner{display:flex; align-items:center; justify-content:space-between; gap:24px;}
-.unilab-site .brand{display:flex; align-items:center; gap:10px; color:#fff;}
+
+.unilab-site .brand{display:flex; 
+  align-items:center; 
+  gap:10px; 
+  color:#fff;}
+
+.unilab-site .brand-logo {
+  height: 40px; 
+  width: auto;
+  display: block;
+}
 
 .unilab-site .brand-word{font-family:'Space Mono',monospace;font-size:15px;letter-spacing:.14em;font-weight:700;}
 .unilab-site nav.links{display:flex; align-items:center; gap:36px;}
@@ -92,7 +84,6 @@
 
 .unilab-site .hero{position:relative; min-height:100vh; display:flex; align-items:center; background:var(--navy-950); overflow:hidden;}
 .unilab-site .hero-bg{position:absolute; inset:0; z-index:0;}
-.unilab-site .hero-bg svg{width:100%; height:100%; display:block;}
 .unilab-site .hero-bg img{width:100%; height:100%; object-fit:cover; object-position:center; display:block;}
 .unilab-site .hero-scrim{
   position:absolute; inset:0;
@@ -170,17 +161,13 @@
   height:100%;
   display:flex;
   flex-direction:column;
-  min-width:0; /* allow flex/grid children to shrink below content size */
+  min-width:0;
 }
-
-/* icon stays put, scales down slightly when collapsed */
 .unilab-site .service-card .service-icon{
   margin-bottom:22px;
   transition: transform .4s var(--ease), background .3s var(--ease-fast);
   flex-shrink:0;
 }
-
-/* Title & body copy: always horizontal and readable, even when collapsed */
 .unilab-site .service-card h3{
   font-size:18px; font-weight:600; color:var(--ink-900);
   margin-bottom:10px;
@@ -191,10 +178,6 @@
 .unilab-site .service-copy .body-text{
   font-size:14px; line-height:1.6; color:var(--ink-600); margin-bottom:0;
 }
-
-/* Only the EXTRA details paragraph is hidden until the card opens.
-   max-height handles the layout expansion; opacity+transform give it a
-   gentle rise-and-fade so it doesn't just "pop" into view. */
 .unilab-site .service-details{
   max-height:0;
   opacity:0;
@@ -221,7 +204,6 @@
   font-size:13.5px; line-height:1.65; color:var(--ink-600);
   padding-top:14px; border-top:1px solid var(--hairline); margin:0 0 18px;
 }
-
 .unilab-site .service-card.open{
   background:#fbfaf6;
   box-shadow:0 22px 44px -30px rgba(0,0,0,.28);
@@ -236,19 +218,16 @@
 .unilab-site .access-link svg.chevron{ transition: transform .35s var(--ease); }
 .unilab-site .service-card.open .access-link svg.chevron{ transform: rotate(90deg); }
 
-/* ---------- Mobile / tablet fallback: plain vertical accordion ---------- */
 @media (max-width:960px){
   .unilab-site .service-grid{ --grid-cols: 1fr 1fr !important; }
 }
 @media (max-width:760px){
   .unilab-site .service-grid{ --grid-cols: 1fr !important; }
 }
-
 @media (prefers-reduced-motion: reduce){
   .unilab-site .service-grid{ transition:none; }
   .unilab-site .service-details{ transition:none; }
 }
-
 
 .unilab-site .departments{background:var(--navy-950);}
 .unilab-site .departments .section-head .eyebrow{color:var(--amber-500);}
@@ -305,3 +284,147 @@
   .unilab-site .service-card, .unilab-site .dept-card{opacity:1; transform:none;}
 }
 .unilab-site :focus-visible{outline:2px solid var(--amber-500); outline-offset:2px;}
+
+/* Department card clickable and map popup styles */
+.unilab-site .dept-card.clickable {
+  cursor: pointer;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.4s ease;
+}
+.unilab-site .dept-card.clickable:hover {
+  transform: translateY(-6px);
+  border-color: var(--amber-500);
+  box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.5);
+}
+.unilab-site .click-hint {
+  display: block;
+  margin-top: 10px;
+  color: var(--amber-500);
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.unilab-site .dept-card.clickable:hover .click-hint {
+  transform: translateX(4px);
+  text-decoration: underline;
+}
+
+.unilab-site .map-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+.unilab-site .map-popup-content {
+  background: var(--navy-900);
+  border-radius: 16px;
+  padding: 30px;
+  max-width: 750px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  border: 1px solid var(--navy-700);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  animation: slideUp 0.35s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.unilab-site .map-popup-content h3 {
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  margin-bottom: 18px;
+  text-align: center;
+  letter-spacing: -0.01em;
+}
+.unilab-site .map-popup-content h3::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 2px;
+  background: var(--amber-500);
+  margin: 10px auto 0;
+}
+.unilab-site .map-popup-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 28px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.unilab-site .map-popup-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transform: rotate(90deg);
+  border-color: var(--amber-500);
+}
+.unilab-site .map-popup-address {
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin-top: 18px;
+  font-size: 14px;
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.04em;
+}
+.unilab-site .map-popup-address::before {
+  content: "📍 ";
+}
+.unilab-site .map-popup-content .leaflet-container {
+  border-radius: 8px;
+  border: 1px solid var(--navy-700);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 600px) {
+  .unilab-site .map-popup-content {
+    padding: 20px 16px;
+    margin: 10px;
+    border-radius: 12px;
+  }
+  .unilab-site .map-popup-content h3 {
+    font-size: 20px;
+    margin-bottom: 14px;
+  }
+  .unilab-site .map-popup-close {
+    font-size: 22px;
+    width: 34px;
+    height: 34px;
+    top: 10px;
+    right: 12px;
+  }
+  .unilab-site .map-popup-content .leaflet-container {
+    height: 300px !important;
+  }
+}

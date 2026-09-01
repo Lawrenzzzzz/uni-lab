@@ -4,6 +4,8 @@ import { NAV_LINKS, SERVICES, DEPARTMENTS } from "./data.jsx";
 import { useReveal } from "./useReveal";
 import bgImg from "./assets/bg-img.png";
 import logoImg from "./assets/unilab-logo.png";
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 
 /* ----------------------------------------------------------------
    Header
@@ -148,9 +150,7 @@ function Services() {
               <div
                 key={s.title}
                 ref={register}
-                className={`service-card${visible[i] ? " in" : ""}${
-                  isOpen ? " open" : ""
-                }`}
+                className={`service-card${visible[i] ? " in" : ""}${isOpen ? " open" : ""}`}
                 onClick={() => toggleCard(i)}
                 role="button"
                 tabIndex={0}
@@ -214,12 +214,55 @@ function Services() {
     </section>
   );
 }
+
+/* ----------------------------------------------------------------
+   Map Popup Component
+------------------------------------------------------------------- */
+
+function MapPopup({ isOpen, onClose }) {
+  if (!isOpen) return null;
+
+  const position = [13.9376, 120.7327]; // Balayan, Batangas
+
+  return (
+    <div className="map-popup-overlay" onClick={onClose}>
+      <div className="map-popup-content" onClick={(e) => e.stopPropagation()}>
+        <button className="map-popup-close" onClick={onClose}>×</button>
+        <h3>📍 Our Location</h3>
+        <MapContainer 
+          center={position} 
+          zoom={15} 
+          style={{ height: '400px', width: '100%', borderRadius: '8px' }}
+        >
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+          />
+          <Marker position={position}>
+            <Popup>UNI-Lab - Balayan, Batangas</Popup>
+          </Marker>
+        </MapContainer>
+        <p className="map-popup-address">📍 220 College Hill Road, Balayan, Batangas</p>
+      </div>
+    </div>
+  );
+}
+
 /* ----------------------------------------------------------------
    Departments
 ------------------------------------------------------------------- */
 
 function Departments() {
   const { register, visible } = useReveal(DEPARTMENTS.length);
+  const [showMap, setShowMap] = useState(false);
+
+  const handleCardClick = (e, d) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (d.title === "Physical Location") {
+      setShowMap(true);
+    }
+  };
 
   return (
     <section className="departments" id="departments">
@@ -230,18 +273,34 @@ function Departments() {
           <p>If you are interested in using this platform just email us!</p>
         </div>
         <div className="dept-grid">
-          {DEPARTMENTS.map((d, i) => (
-            <div key={d.title} ref={register} className={`dept-card${visible[i] ? " in" : ""}`}>
-              <div className="dept-media">{d.media}</div>
-              <div className="dept-body">
-                <h3>{d.title}</h3>
-                <span className="dept-dean">{d.dean}</span>
-                <p>{d.body}</p>
+          {DEPARTMENTS.map((d, i) => {
+            const isClickable = d.title === "Physical Location";
+            return (
+              <div 
+                key={d.title} 
+                ref={register} 
+                className={`dept-card${visible[i] ? " in" : ""}${isClickable ? " clickable" : ""}`}
+                onClick={(e) => handleCardClick(e, d)}
+                style={{ cursor: isClickable ? 'pointer' : 'default' }}
+              >
+                <div className="dept-media">{d.media}</div>
+                <div className="dept-body">
+                  <h3>{d.title}</h3>
+                  <span className="dept-dean">{d.dean}</span>
+                  <p>
+                    {d.body}
+                    {isClickable && (
+                      <span className="click-hint"> 🗺️ Click to view map</span>
+                    )}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
+      
+      <MapPopup isOpen={showMap} onClose={() => setShowMap(false)} />
     </section>
   );
 }
