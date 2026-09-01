@@ -118,34 +118,101 @@ function Hero() {
 
 function Services() {
   const { register, visible } = useReveal(SERVICES.length);
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const toggleCard = (i) => {
+    setOpenIndex((prev) => (prev === i ? null : i));
+  };
 
   return (
     <section className="services" id="services">
       <div className="wrap">
+
         <div className="section-head">
           <p className="eyebrow">What is UNI-Lab?</p>
-          <h2>University - <span style={{fontStyle: 'italic'}}>Learning Academic Bridge</span></h2>
+
+          <h2>
+            University -{" "}
+            <span style={{ fontStyle: "italic" }}>
+              Learning Academic Bridge
+            </span>
+          </h2>
         </div>
+
         <div className="service-grid">
-          {SERVICES.map((s, i) => (
-            <div key={s.title} ref={register} className={`service-card${visible[i] ? " in" : ""}`}>
-              <div className="service-icon">{s.icon}</div>
-              <h3>{s.title}</h3>
-              <p>{s.body}</p>
-              <a href="#" className="access-link">
-                Access Hub
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                  <path d="M9 6l6 6-6 6" />
-                </svg>
-              </a>
-            </div>
-          ))}
+          {SERVICES.map((s, i) => {
+            const isOpen = openIndex === i;
+
+            return (
+              <div
+                key={s.title}
+                ref={register}
+                className={`service-card${visible[i] ? " in" : ""}${
+                  isOpen ? " open" : ""
+                }`}
+                onClick={() => toggleCard(i)}
+                role="button"
+                tabIndex={0}
+                aria-expanded={isOpen}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    toggleCard(i);
+                  }
+                }}
+              >
+                <div className="card-inner">
+
+                  <div className="service-icon">
+                    {s.icon}
+                  </div>
+
+                  <h3>{s.title}</h3>
+
+                  <div className="service-copy">
+
+                    <p className="body-text">
+                      {s.body}
+                    </p>
+
+                    <div className="service-details">
+                      <p>{s.details}</p>
+                    </div>
+
+                    <a
+                      href="#"
+                      className="access-link"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleCard(i);
+                      }}
+                    >
+                      {isOpen ? "Show Less" : "Access Hub"}
+
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        className="chevron"
+                      >
+                        <path d="M9 6l6 6-6 6" />
+                      </svg>
+                    </a>
+
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
+
       </div>
     </section>
   );
 }
-
 /* ----------------------------------------------------------------
    Departments
 ------------------------------------------------------------------- */

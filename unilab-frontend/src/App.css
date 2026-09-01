@@ -123,6 +123,90 @@
 .unilab-site .service-card:hover .access-link{color:var(--amber-600);}
 .unilab-site .service-card:hover .access-link svg{transform:translateX(4px);}
 
+/* ---------- Expanding "bloom" grid (desktop) ---------- */
+.unilab-site .service-grid{
+  --grid-cols: 1fr 1fr 1fr 1fr;
+  grid-template-columns: var(--grid-cols);
+  transition: grid-template-columns .55s var(--ease);
+  align-items: stretch;
+}
+
+@media (min-width:961px){
+  .unilab-site .service-grid:has(.service-card:nth-child(1).open){ --grid-cols: 2.6fr .8fr .8fr .8fr; }
+  .unilab-site .service-grid:has(.service-card:nth-child(2).open){ --grid-cols: .8fr 2.6fr .8fr .8fr; }
+  .unilab-site .service-grid:has(.service-card:nth-child(3).open){ --grid-cols: .8fr .8fr 2.6fr .8fr; }
+  .unilab-site .service-grid:has(.service-card:nth-child(4).open){ --grid-cols: .8fr .8fr .8fr 2.6fr; }
+}
+
+.unilab-site .service-card{
+  cursor:pointer;
+  overflow:hidden;
+  position:relative;
+  padding:0;
+  transition: background .3s var(--ease-fast);
+}
+.unilab-site .service-card .card-inner{
+  padding:36px 26px;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  min-width:0; /* allow flex/grid children to shrink below content size */
+}
+
+/* icon stays put, scales down slightly when collapsed */
+.unilab-site .service-card .service-icon{
+  margin-bottom:22px;
+  transition: transform .4s var(--ease), background .3s var(--ease-fast);
+  flex-shrink:0;
+}
+
+/* Title & body copy: always horizontal and readable, even when collapsed */
+.unilab-site .service-card h3{
+  font-size:18px; font-weight:600; color:var(--ink-900);
+  margin-bottom:10px;
+}
+.unilab-site .service-copy{
+  overflow:visible;
+}
+.unilab-site .service-copy .body-text{
+  font-size:14px; line-height:1.6; color:var(--ink-600); margin-bottom:0;
+}
+
+/* Only the EXTRA details paragraph is hidden until the card opens */
+.unilab-site .service-details{
+  max-height:0;
+  opacity:0;
+  overflow:hidden;
+  transition: max-height .55s var(--ease), opacity .4s var(--ease-fast), margin .4s var(--ease);
+}
+.unilab-site .service-card.open .service-details{
+  max-height:300px;
+  opacity:1;
+  margin-top:14px;
+}
+.unilab-site .service-details p{
+  font-size:13.5px; line-height:1.65; color:var(--ink-600);
+  padding-top:14px; border-top:1px solid var(--hairline); margin:0 0 18px;
+}
+
+.unilab-site .service-card.open{ background:#fbfaf6; }
+.unilab-site .access-link svg.chevron{ transition: transform .35s var(--ease); }
+.unilab-site .service-card.open .access-link svg.chevron{ transform: rotate(90deg); }
+
+/* ---------- Mobile / tablet fallback: plain vertical accordion ---------- */
+@media (max-width:960px){
+  .unilab-site .service-grid{ --grid-cols: 1fr 1fr !important; }
+}
+@media (max-width:760px){
+  .unilab-site .service-grid{ --grid-cols: 1fr !important; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .unilab-site .service-grid{ transition:none; }
+  .unilab-site .service-details{ transition:none; }
+}
+
+
 .unilab-site .departments{background:var(--navy-950);}
 .unilab-site .departments .section-head .eyebrow{color:var(--amber-500);}
 .unilab-site .departments .section-head h2{color:#fff; text-align: left; }

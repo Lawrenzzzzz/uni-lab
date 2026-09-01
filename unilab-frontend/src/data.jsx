@@ -13,6 +13,7 @@ export const SERVICES = [
   {
     title: "Registrar & Grades",
     body: "View academic transcripts, structural credit updates, register for upcoming terms, and manage tuition schedules.",
+    details: "Log in with your student ID to pull real-time GPA calculations, download official transcripts as PDFs, and lock in your course schedule before add/drop deadlines close.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M22 10L12 5 2 10l10 5 10-5Z" />
@@ -23,6 +24,7 @@ export const SERVICES = [
   {
     title: "Digital Library",
     body: "Access over 450,000 academic journals, peer-reviewed articles, reserve study pods, and query expert research librarians.",
+    details: "Log in with your student ID to pull real-time GPA calculations, download official transcripts as PDFs, and lock in your course schedule before add/drop deadlines close.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
@@ -33,6 +35,7 @@ export const SERVICES = [
   {
     title: "Admissions Hub",
     body: "Submit critical transfer paperwork, track application lifecycles, and check scholarship eligibility status.",
+    details: "Log in with your student ID to pull real-time GPA calculations, download official transcripts as PDFs, and lock in your course schedule before add/drop deadlines close.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
@@ -44,6 +47,7 @@ export const SERVICES = [
   {
     title: "Campus Calendar",
     body: "Never miss lectures, academic symposia, midterms, or major campus athletic events.",
+    details: "Log in with your student ID to pull real-time GPA calculations, download official transcripts as PDFs, and lock in your course schedule before add/drop deadlines close.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <rect x="3" y="4" width="18" height="18" rx="2" />
