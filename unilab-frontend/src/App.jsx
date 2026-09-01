@@ -3,6 +3,7 @@ import "./App.css";
 import { NAV_LINKS, SERVICES, DEPARTMENTS } from "./data.jsx";
 import { useReveal } from "./useReveal";
 import bgImg from "./assets/bg-img.png";
+import logoImg from "./assets/unilab-logo.png";
 
 /* ----------------------------------------------------------------
    Header
@@ -40,7 +41,7 @@ function Header() {
       <header id="siteHeader" className={scrolled ? "scrolled" : ""}>
         <div className="wrap nav-inner">
           <a href="#top" className="brand">
-            <span className="brand-mark"></span>
+            <img src={logoImg} alt="UNI-Lab Logo" className="brand-logo" />
             <span className="brand-word">UNI-Lab</span>
           </a>
 
