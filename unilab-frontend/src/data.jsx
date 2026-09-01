@@ -55,9 +55,9 @@ export const SERVICES = [
 
 export const DEPARTMENTS = [
   {
-    title: "School of Computing",
-    dean: "Dean: Dr. Aris Thorne",
-    body: "Leading the paradigm shift in hardware-software co-design, artificial neural networks, and secure distributed ledger technologies.",
+    title: "Physical Location",
+    dean: "Balayan, Batangas",
+    body: "If you're interested to meet us in person this is our Location, you can find it in Google Map. Just Click this",
     media: (
       <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -84,9 +84,9 @@ export const DEPARTMENTS = [
     ),
   },
   {
-    title: "Humanities & Philosophy",
-    dean: "Dean: Prof. Beatrice Vance",
-    body: "Exclusively structured to foster deep ethical inquiry, historical critical analysis, and dialectical synthesis in a global context.",
+    title: "Email",
+    dean: "unilab@gmail.com",
+    body: "If you have any concern or any question about this website we would to discuss it for you, Just Email Us!",
     media: (
       <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -117,9 +117,9 @@ export const DEPARTMENTS = [
     ),
   },
   {
-    title: "School of Business",
-    dean: "Dean: Dr. Marcus Stirling",
-    body: "Empowering next-generation executives with empirical econometric models, behavioral consumer labs, and international venture pipelines.",
+    title: "Reviews",
+    dean: "Comment / Feedback",
+    body: "We would love to have your feedback feedback for further improvements, you can leave a feedback here. Thank you!",
     media: (
       <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
         <defs>
