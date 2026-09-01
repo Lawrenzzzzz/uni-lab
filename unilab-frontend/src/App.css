@@ -172,24 +172,47 @@
   font-size:14px; line-height:1.6; color:var(--ink-600); margin-bottom:0;
 }
 
-/* Only the EXTRA details paragraph is hidden until the card opens */
+/* Only the EXTRA details paragraph is hidden until the card opens.
+   max-height handles the layout expansion; opacity+transform give it a
+   gentle rise-and-fade so it doesn't just "pop" into view. */
 .unilab-site .service-details{
   max-height:0;
   opacity:0;
   overflow:hidden;
-  transition: max-height .55s var(--ease), opacity .4s var(--ease-fast), margin .4s var(--ease);
+  transform:translateY(-6px);
+  transition:
+    max-height .6s var(--ease),
+    opacity .45s var(--ease-fast) 0s,
+    transform .45s var(--ease-fast) 0s,
+    margin .6s var(--ease);
 }
 .unilab-site .service-card.open .service-details{
   max-height:300px;
   opacity:1;
+  transform:translateY(0);
   margin-top:14px;
+  transition:
+    max-height .6s var(--ease),
+    opacity .5s var(--ease-fast) .12s,
+    transform .5s var(--ease-fast) .12s,
+    margin .6s var(--ease);
 }
 .unilab-site .service-details p{
   font-size:13.5px; line-height:1.65; color:var(--ink-600);
   padding-top:14px; border-top:1px solid var(--hairline); margin:0 0 18px;
 }
 
-.unilab-site .service-card.open{ background:#fbfaf6; }
+.unilab-site .service-card.open{
+  background:#fbfaf6;
+  box-shadow:0 22px 44px -30px rgba(0,0,0,.28);
+}
+.unilab-site .service-card{
+  transition: background .45s var(--ease-fast), box-shadow .5s var(--ease);
+}
+.unilab-site .service-card.open .service-icon{
+  transform:scale(1.06);
+  background:rgba(242,168,62,.22);
+}
 .unilab-site .access-link svg.chevron{ transition: transform .35s var(--ease); }
 .unilab-site .service-card.open .access-link svg.chevron{ transform: rotate(90deg); }
 

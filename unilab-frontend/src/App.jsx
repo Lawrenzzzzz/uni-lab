@@ -188,7 +188,7 @@ function Services() {
                         toggleCard(i);
                       }}
                     >
-                      {isOpen ? "Show Less" : "Access Hub"}
+                      {isOpen ? "Show Less" : "Learn More"}
 
                       <svg
                         viewBox="0 0 24 24"
