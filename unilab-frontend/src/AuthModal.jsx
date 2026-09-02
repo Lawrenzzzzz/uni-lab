@@ -150,12 +150,11 @@ export default function AuthModal({ isOpen, onClose }) {
           {mode === "login" ? (
             <form className="auth-form" onSubmit={handleLoginSubmit}>
               <div className="auth-field">
-                <label>Institutional Email</label>
+                <label>Email</label>
                 <div className="auth-input">
                   <span className="auth-icon">✉</span>
                   <input
                     type="email"
-                    placeholder="username@unilab.edu"
                     value={loginData.email}
                     onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
                     required
@@ -172,7 +171,6 @@ export default function AuthModal({ isOpen, onClose }) {
                   <span className="auth-icon">🔒</span>
                   <input
                     type="password"
-                    placeholder="••••••••"
                     value={loginData.password}
                     onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
                     required
@@ -204,7 +202,6 @@ export default function AuthModal({ isOpen, onClose }) {
                   <span className="auth-icon">👤</span>
                   <input
                     type="text"
-                    placeholder="Jane Doe"
                     value={signupData.fullName}
                     onChange={(e) => setSignupData({ ...signupData, fullName: e.target.value })}
                     required
@@ -218,7 +215,7 @@ export default function AuthModal({ isOpen, onClose }) {
                   <span className="auth-icon">✉</span>
                   <input
                     type="email"
-                    placeholder="j.doe@unilab.edu"
+                    placeholder="example@gmail.com"
                     value={signupData.email}
                     onChange={(e) => setSignupData({ ...signupData, email: e.target.value })}
                     required
