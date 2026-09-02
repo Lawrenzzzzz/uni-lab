@@ -946,3 +946,165 @@
 .unilab-site .success-toast .toast-content p {
   color: var(--ink-600);
 }
+
+/* ---------- Auth Modal ---------- */
+.unilab-site .auth-overlay { z-index: 1100; }
+.unilab-site .auth-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 36px 0 36px 32px;
+  max-width: 380px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.35s cubic-bezier(0.19, 1, 0.22, 1);
+  text-align: center;
+}
+.unilab-site .auth-badge {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: rgba(19, 41, 79, 0.08);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 14px;
+}
+.unilab-site .auth-badge img { width: 24px; height: 24px; object-fit: contain; }
+.unilab-site .auth-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 15px; letter-spacing: .14em; font-weight: 700;
+  color: var(--navy-900); margin-bottom: 4px;
+}
+.unilab-site .auth-subtitle { font-size: 13px; color: var(--ink-600); margin-bottom: 22px; }
+.unilab-site .auth-success {
+  background: rgba(46, 204, 113, .12); color: #1e8449;
+  border: 1px solid rgba(46, 204, 113, .35);
+  border-radius: 8px; padding: 10px 12px; font-size: 13px; margin-bottom: 16px;
+}
+.unilab-site .auth-error {
+  background: rgba(229, 72, 77, .1); color: #c62828;
+  border: 1px solid rgba(229, 72, 77, .35);
+  border-radius: 8px; padding: 10px 12px; font-size: 13px; margin-bottom: 16px;
+}
+.unilab-site .auth-form { display: flex; flex-direction: column; gap: 16px; text-align: left; }
+.unilab-site .auth-field label {
+  font-size: 12px; font-weight: 600; color: var(--ink-900);
+  display: block; margin-bottom: 6px;
+}
+.unilab-site .auth-field-header { display: flex; justify-content: space-between; align-items: center; }
+.unilab-site .auth-link-small { font-size: 12px; color: var(--amber-600); font-weight: 600; }
+.unilab-site .auth-input {
+  display: flex; align-items: center; gap: 8px;
+  background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px;
+  padding: 11px 14px; transition: border-color .2s ease, box-shadow .2s ease;
+}
+.unilab-site .auth-input:focus-within {
+  border-color: var(--amber-500); box-shadow: 0 0 0 3px rgba(242,168,62,.15);
+}
+.unilab-site .auth-input input {
+  border: none; background: transparent; outline: none;
+  font-size: 14px; width: 100%; color: var(--ink-900);
+}
+.unilab-site .auth-icon { font-size: 14px; opacity: .6; }
+.unilab-site .field-error { color: #c62828; font-size: 12px; margin-top: 4px; display: block; }
+.unilab-site .auth-submit { width: 100%; justify-content: center; margin-top: 4px; }
+.unilab-site .auth-divider {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Space Mono', monospace; font-size: 10.5px;
+  letter-spacing: .1em; color: var(--ink-400); text-transform: uppercase;
+}
+.unilab-site .auth-divider::before, .unilab-site .auth-divider::after {
+  content: ""; flex: 1; height: 1px; background: var(--hairline);
+}
+.unilab-site .auth-oauth-row { display: flex; gap: 12px; }
+.unilab-site .auth-oauth-btn {
+  flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #e5e7eb;
+  background: #fff; font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: border-color .2s ease, background .2s ease;
+}
+.unilab-site .auth-oauth-btn:hover { border-color: var(--amber-500); background: #fffaf0; }
+.unilab-site .auth-switch { text-align: center; font-size: 13px; color: var(--ink-600); margin: 4px 0 0; }
+.unilab-site .auth-switch a { color: var(--amber-600); font-weight: 700; text-decoration: underline; }
+.unilab-site .auth-checkbox {
+  display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: var(--ink-600);
+}
+.unilab-site .auth-checkbox input { margin-top: 2px; }
+.unilab-site .auth-checkbox a { color: var(--amber-600); text-decoration: underline; }
+
+/* Password strength meter */
+.unilab-site .password-strength { margin-top: 8px; }
+.unilab-site .strength-bar-track { display: flex; gap: 4px; margin-bottom: 6px; }
+.unilab-site .strength-bar-seg {
+  flex: 1; height: 5px; border-radius: 3px; background: #e5e7eb;
+  transition: background .25s ease;
+}
+.unilab-site .strength-label { font-size: 12px; font-weight: 700; }
+.unilab-site .strength-rules { margin-top: 4px; }
+.unilab-site .strength-rules ul { list-style: none; margin: 6px 0 0; padding: 0; }
+.unilab-site .strength-rules li {
+  font-size: 11.5px; color: var(--ink-400); padding: 1px 0;
+}
+.unilab-site .strength-rules li.met { color: #1e8449; }
+
+/* Scrollable signup card — close button stays fixed, only the body scrolls */
+.unilab-site .auth-card-scroll {
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.unilab-site .auth-card-body {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 4px;
+}
+
+.unilab-site .auth-card-body::-webkit-scrollbar {
+  width: 6px;
+}
+.unilab-site .auth-card-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+.unilab-site .auth-card-body::-webkit-scrollbar-thumb {
+  background: var(--amber-500);
+  border-radius: 10px;
+}
+.unilab-site .auth-card-body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--amber-500) transparent;
+}
+
+/* Make the X button clearly visible and always in the same spot */
+.unilab-site .auth-close-fixed {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  z-index: 5;
+  color: #081326;
+}
+
+/* ---------- Auth Modal Fixes: Scrollbar flush to the right edge ---------- */
+/* Remove right padding so the scrollbar sits at the modal's border */
+.unilab-site .auth-card-body {
+  padding-right: 24px;
+  padding-left: 0px; /* keep slight left breathing room */
+}
+
+/* Add inner padding to form elements so text doesn't touch the edge */
+.unilab-site .auth-card-body .auth-form,
+.unilab-site .auth-card-body .auth-success,
+.unilab-site .auth-card-body .auth-error,
+.unilab-site .auth-card-body .auth-switch {
+  padding-right: 10px;
+}
+
+/* Adjust close button position so it's not overlapped by scrollbar */
+.unilab-site .auth-close-fixed {
+  right: 10px;
+}
+
+/* Keep close button visible on hover (reapplied) */
+.unilab-site .auth-close-fixed:hover {
+  background: rgba(0, 0, 0, 0.08) !important;
+  color: #081326 !important;
+  transform: rotate(90deg);
+  border-color: var(--amber-500);
+}

@@ -7,6 +7,7 @@ import logoImg from "./assets/unilab-logo.png";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet'; 
+import AuthModal from "./AuthModal";
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -20,7 +21,7 @@ L.Icon.Default.mergeOptions({
    Header
 ------------------------------------------------------------------- */
 
-function Header() {
+function Header({ onOpenAuth }) {
   const [scrolled, setScrolled] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
 
@@ -62,11 +63,21 @@ function Header() {
                 {link.label}
               </a>
             ))}
-            <a href="#" className="btn btn-primary mobile-portal-btn" onClick={closeNav}>Student Portal</a>
+            <button
+              className="btn btn-primary mobile-portal-btn"
+              onClick={() => {
+                closeNav();
+                onOpenAuth();
+              }}
+            >
+              Student Portal
+            </button>
           </nav>
 
           <div className="nav-right">
-            <a href="#" className="btn btn-primary">Student Portal</a>
+            <button className="btn btn-primary" onClick={onOpenAuth}>
+              Student Portal
+            </button>
             <button
               className={`burger${navOpen ? " open" : ""}`}
               aria-label="Toggle menu"
@@ -706,13 +717,16 @@ function Footer() {
 ------------------------------------------------------------------- */
 
 export default function App() {
+  const [showAuth, setShowAuth] = useState(false);
+
   return (
     <div className="unilab-site">
-      <Header />
+      <Header onOpenAuth={() => setShowAuth(true)} />
       <Hero />
       <Services />
       <Departments />
       <Footer />
+      <AuthModal isOpen={showAuth} onClose={() => setShowAuth(false)} />
     </div>
   );
 }

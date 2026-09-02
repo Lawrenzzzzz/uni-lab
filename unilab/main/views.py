@@ -1,8 +1,16 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework import status
+from django.contrib.auth import authenticate, login as django_login, get_user_model
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError as DjangoValidationError
 from django.core.mail import EmailMessage
 from django.conf import settings
+
+from .serializers import SignupSerializer
+
+User = get_user_model()
 
 
 @api_view(['POST'])
@@ -40,3 +48,49 @@ def send_contact_email(request):
         )
 
     return Response({"success": True, "message": "Email sent successfully."})
+
+
+@api_view(['POST'])
+@authentication_classes([])
+@permission_classes([AllowAny])
+def signup(request):
+    serializer = SignupSerializer(data=request.data)
+    if serializer.is_valid():
+        user = serializer.save()
+        return Response(
+            {"message": "Account created successfully.", "email": user.email},
+            status=status.HTTP_201_CREATED,
+        )
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@authentication_classes([])
+@permission_classes([AllowAny])
+def check_password_strength(request):
+    password = request.data.get('password', '')
+    try:
+        validate_password(password)
+        return Response({"valid": True, "errors": []})
+    except DjangoValidationError as e:
+        return Response({"valid": False, "errors": list(e.messages)})
+
+
+@api_view(['POST'])
+@authentication_classes([])
+@permission_classes([AllowAny])
+def login_view(request):
+    email = request.data.get('email', '')
+    password = request.data.get('password', '')
+
+    try:
+        user_obj = User.objects.get(email__iexact=email)
+    except User.DoesNotExist:
+        return Response({"detail": "Invalid email or password."}, status=status.HTTP_400_BAD_REQUEST)
+
+    user = authenticate(request, username=user_obj.username, password=password)
+    if user is None:
+        return Response({"detail": "Invalid email or password."}, status=status.HTTP_400_BAD_REQUEST)
+
+    django_login(request, user)
+    return Response({"message": "Logged in successfully.", "email": user.email})

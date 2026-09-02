@@ -2,5 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('contact/', views.send_contact_email, name='send_contact_email'),
+    path('contact/send-email/', views.send_contact_email, name='send-contact-email'),
+    path('auth/signup/', views.signup, name='signup'),
+    path('auth/login/', views.login_view, name='login'),
+    path('auth/check-password/', views.check_password_strength, name='check-password'),
 ]
