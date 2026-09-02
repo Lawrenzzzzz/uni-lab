@@ -4,17 +4,18 @@ import { NAV_LINKS, SERVICES, DEPARTMENTS } from "./data.jsx";
 import { useReveal } from "./useReveal";
 import bgImg from "./assets/bg-img.png";
 import logoImg from "./assets/unilab-logo.png";
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet'; 
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
 import AuthModal from "./AuthModal";
 
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+  iconRetinaUrl:
+    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
 });
 
 /* ----------------------------------------------------------------
@@ -59,7 +60,12 @@ function Header({ onOpenAuth }) {
 
           <nav className={`links${navOpen ? " open" : ""}`} id="navLinks">
             {NAV_LINKS.map((link, i) => (
-              <a key={link.href} href={link.href} className={i === 0 ? "active" : ""} onClick={closeNav}>
+              <a
+                key={link.href}
+                href={link.href}
+                className={i === 0 ? "active" : ""}
+                onClick={closeNav}
+              >
                 {link.label}
               </a>
             ))}
@@ -84,13 +90,18 @@ function Header({ onOpenAuth }) {
               aria-expanded={navOpen}
               onClick={() => setNavOpen((o) => !o)}
             >
-              <span></span><span></span><span></span>
+              <span></span>
+              <span></span>
+              <span></span>
             </button>
           </div>
         </div>
       </header>
 
-      <div className={`nav-backdrop${navOpen ? " open" : ""}`} onClick={closeNav}></div>
+      <div
+        className={`nav-backdrop${navOpen ? " open" : ""}`}
+        onClick={closeNav}
+      ></div>
     </>
   );
 }
@@ -112,7 +123,8 @@ function Hero() {
         <p className="eyebrow">UNI-Lab · EST. 2026</p>
 
         <h1>
-          Where heritage meets<br />
+          Where heritage meets
+          <br />
           the cutting <em>edge.</em>
         </h1>
 
@@ -123,8 +135,12 @@ function Hero() {
         </p>
 
         <div className="hero-ctas">
-          <a href="#services" className="btn btn-primary">Apply Now</a>
-          <a href="#departments" className="btn btn-outline">Inquire</a>
+          <a href="#services" className="btn btn-primary">
+            Apply Now
+          </a>
+          <a href="#departments" className="btn btn-outline">
+            Inquire
+          </a>
         </div>
       </div>
 
@@ -150,7 +166,7 @@ function Services() {
   return (
     <section className="services" id="services">
       <div className="wrap">
-
+        
         <div className="section-head">
           <p className="eyebrow">What is UNI-Lab and It's Main Function?</p>
 
@@ -183,18 +199,12 @@ function Services() {
                 }}
               >
                 <div className="card-inner">
-
-                  <div className="service-icon">
-                    {s.icon}
-                  </div>
+                  <div className="service-icon">{s.icon}</div>
 
                   <h3>{s.title}</h3>
 
                   <div className="service-copy">
-
-                    <p className="body-text">
-                      {s.body}
-                    </p>
+                    <p className="body-text">{s.body}</p>
 
                     <div className="service-details">
                       <p>{s.details}</p>
@@ -229,7 +239,7 @@ function Services() {
             );
           })}
         </div>
-
+        
       </div>
     </section>
   );
@@ -247,12 +257,14 @@ function MapPopup({ isOpen, onClose }) {
   return (
     <div className="map-popup-overlay" onClick={onClose}>
       <div className="map-popup-content" onClick={(e) => e.stopPropagation()}>
-        <button className="map-popup-close" onClick={onClose}>×</button>
+        <button className="map-popup-close" onClick={onClose}>
+          ×
+        </button>
         <h3>📍 Our Location</h3>
-        <MapContainer 
-          center={position} 
-          zoom={15} 
-          style={{ height: '400px', width: '100%', borderRadius: '8px' }}
+        <MapContainer
+          center={position}
+          zoom={15}
+          style={{ height: "400px", width: "100%", borderRadius: "8px" }}
         >
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -262,7 +274,9 @@ function MapPopup({ isOpen, onClose }) {
             <Popup>UNI-Lab - Balayan, Batangas</Popup>
           </Marker>
         </MapContainer>
-        <p className="map-popup-address">📍📍 220 College Hill Road, Balayan, Batangas</p>
+        <p className="map-popup-address">
+          📍📍 220 College Hill Road, Balayan, Batangas
+        </p>
       </div>
     </div>
   );
@@ -274,46 +288,46 @@ function MapPopup({ isOpen, onClose }) {
 
 function EmailModal({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    cc: '',
-    subject: '',
-    message: ''
+    name: "",
+    email: "",
+    cc: "",
+    subject: "",
+    message: "",
   });
   const [showSuccess, setShowSuccess] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
+  const [errorMsg, setErrorMsg] = useState("");
   const [sending, setSending] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMsg('');
+    setErrorMsg("");
     setSending(true);
 
     try {
-      const res = await fetch('http://localhost:8000/api/contact/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("http://localhost:8000/api/contact/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || 'Something went wrong.');
+        throw new Error(data.error || "Something went wrong.");
       }
 
       setShowSuccess(true);
-      setFormData({ name: '', email: '', cc: '', subject: '', message: '' });
+      setFormData({ name: "", email: "", cc: "", subject: "", message: "" });
       setTimeout(() => setShowSuccess(false), 3000);
     } catch (err) {
-      setErrorMsg(err.message || 'Failed to send. Please try again.');
+      setErrorMsg(err.message || "Failed to send. Please try again.");
     } finally {
       setSending(false);
     }
@@ -323,8 +337,13 @@ function EmailModal({ isOpen, onClose }) {
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content email-modal" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose}>×</button>
+      <div
+        className="modal-content email-modal"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button className="modal-close" onClick={onClose}>
+          ×
+        </button>
 
         <div className="modal-header">
           <h3>📧 Send us an Email</h3>
@@ -396,16 +415,22 @@ function EmailModal({ isOpen, onClose }) {
           </div>
 
           {errorMsg && (
-            <p style={{ color: '#e0932a', fontSize: '13px', margin: 0 }}>{errorMsg}</p>
+            <p style={{ color: "#e0932a", fontSize: "13px", margin: 0 }}>
+              {errorMsg}
+            </p>
           )}
 
-          <button type="submit" className="btn btn-primary submit-btn" disabled={sending}>
-            {sending ? 'Sending...' : 'Send Message ✉️'}
+          <button
+            type="submit"
+            className="btn btn-primary submit-btn"
+            disabled={sending}
+          >
+            {sending ? "Sending..." : "Send Message ✉️"}
           </button>
         </form>
       </div>
 
-      <div className={`success-toast${showSuccess ? ' show' : ''}`}>
+      <div className={`success-toast${showSuccess ? " show" : ""}`}>
         <div className="toast-content">
           <span className="toast-icon">✅</span>
           <div>
@@ -424,67 +449,72 @@ function EmailModal({ isOpen, onClose }) {
 function ReviewModal({ isOpen, onClose }) {
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
-  const [name, setName] = useState('');
-  const [comment, setComment] = useState('');
+  const [name, setName] = useState("");
+  const [comment, setComment] = useState("");
   const [reviews, setReviews] = useState(() => {
     // Load reviews from localStorage or use default
-    const saved = localStorage.getItem('unilab-reviews');
-    return saved ? JSON.parse(saved) : [
-      {
-        id: 1,
-        name: "Maria Santos",
-        rating: 5,
-        comment: "This platform is amazing! It makes tracking my classes so much easier.",
-        date: "2026-08-28"
-      },
-      {
-        id: 2,
-        name: "John Dela Cruz",
-        rating: 4,
-        comment: "Great tool for attendance tracking. Would love to see more features added.",
-        date: "2026-08-25"
-      },
-      {
-        id: 3,
-        name: "Anna Reyes",
-        rating: 5,
-        comment: "The schedule maker saved me so much time! Highly recommended for all students.",
-        date: "2026-08-20"
-      }
-    ];
+    const saved = localStorage.getItem("unilab-reviews");
+    return saved
+      ? JSON.parse(saved)
+      : [
+          {
+            id: 1,
+            name: "Maria Santos",
+            rating: 5,
+            comment:
+              "This platform is amazing! It makes tracking my classes so much easier.",
+            date: "2026-08-28",
+          },
+          {
+            id: 2,
+            name: "John Dela Cruz",
+            rating: 4,
+            comment:
+              "Great tool for attendance tracking. Would love to see more features added.",
+            date: "2026-08-25",
+          },
+          {
+            id: 3,
+            name: "Anna Reyes",
+            rating: 5,
+            comment:
+              "The schedule maker saved me so much time! Highly recommended for all students.",
+            date: "2026-08-20",
+          },
+        ];
   });
   const [showSuccess, setShowSuccess] = useState(false);
 
   // Save reviews to localStorage whenever they change
   useEffect(() => {
-    localStorage.setItem('unilab-reviews', JSON.stringify(reviews));
+    localStorage.setItem("unilab-reviews", JSON.stringify(reviews));
   }, [reviews]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (rating === 0) {
-      alert('Please select a star rating before submitting.');
+      alert("Please select a star rating before submitting.");
       return;
     }
 
     const newReview = {
       id: Date.now(),
-      name: name || 'Anonymous',
+      name: name || "Anonymous",
       rating: rating,
       comment: comment,
-      date: new Date().toISOString().split('T')[0]
+      date: new Date().toISOString().split("T")[0],
     };
 
     setReviews([newReview, ...reviews]);
     setShowSuccess(true);
-    
+
     // Reset form
     setRating(0);
     setHoverRating(0);
-    setName('');
-    setComment('');
-    
+    setName("");
+    setComment("");
+
     setTimeout(() => {
       setShowSuccess(false);
     }, 3000);
@@ -496,17 +526,17 @@ function ReviewModal({ isOpen, onClose }) {
   const Star = ({ filled, onMouseEnter, onMouseLeave, onClick }) => (
     <svg
       viewBox="0 0 24 24"
-      fill={filled ? 'var(--amber-500)' : 'none'}
+      fill={filled ? "var(--amber-500)" : "none"}
       stroke="var(--amber-500)"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
       style={{
-        width: '36px',
-        height: '36px',
-        cursor: 'pointer',
-        transition: 'transform 0.2s ease, fill 0.2s ease',
-        transform: filled ? 'scale(1.1)' : 'scale(1)',
+        width: "36px",
+        height: "36px",
+        cursor: "pointer",
+        transition: "transform 0.2s ease, fill 0.2s ease",
+        transform: filled ? "scale(1.1)" : "scale(1)",
       }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
@@ -518,9 +548,14 @@ function ReviewModal({ isOpen, onClose }) {
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content review-modal" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose}>×</button>
-        
+      <div
+        className="modal-content review-modal"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button className="modal-close" onClick={onClose}>
+          ×
+        </button>
+
         <div className="modal-header">
           <h3>⭐ Reviews & Feedback</h3>
           <p>Share your experience with UNI-Lab</p>
@@ -541,7 +576,7 @@ function ReviewModal({ isOpen, onClose }) {
                 />
               ))}
               <span className="rating-label">
-                {rating > 0 ? `${rating} / 5 stars` : 'Click to rate'}
+                {rating > 0 ? `${rating} / 5 stars` : "Click to rate"}
               </span>
             </div>
           </div>
@@ -580,10 +615,12 @@ function ReviewModal({ isOpen, onClose }) {
             <h4>📝 What others are saying</h4>
             <span className="review-count">{reviews.length} reviews</span>
           </div>
-          
+
           <div className="reviews-list">
             {reviews.length === 0 ? (
-              <p className="no-reviews">No reviews yet. Be the first to share your feedback!</p>
+              <p className="no-reviews">
+                No reviews yet. Be the first to share your feedback!
+              </p>
             ) : (
               reviews.map((review) => (
                 <div key={review.id} className="review-item">
@@ -597,12 +634,14 @@ function ReviewModal({ isOpen, onClose }) {
                         <svg
                           key={star}
                           viewBox="0 0 24 24"
-                          fill={star <= review.rating ? 'var(--amber-500)' : 'none'}
+                          fill={
+                            star <= review.rating ? "var(--amber-500)" : "none"
+                          }
                           stroke="var(--amber-500)"
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"
-                          style={{ width: '16px', height: '16px' }}
+                          style={{ width: "16px", height: "16px" }}
                         >
                           <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                         </svg>
@@ -618,7 +657,7 @@ function ReviewModal({ isOpen, onClose }) {
       </div>
 
       {/* Success Toast */}
-      <div className={`success-toast${showSuccess ? ' show' : ''}`}>
+      <div className={`success-toast${showSuccess ? " show" : ""}`}>
         <div className="toast-content">
           <span className="toast-icon">✅</span>
           <div>
@@ -644,7 +683,7 @@ function Departments() {
   const handleCardClick = (e, d) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     if (d.title === "Physical Location") {
       setShowMap(true);
     } else if (d.title === "Email") {
@@ -664,14 +703,17 @@ function Departments() {
         </div>
         <div className="dept-grid">
           {DEPARTMENTS.map((d, i) => {
-            const isClickable = d.title === "Physical Location" || d.title === "Email" || d.title === "Reviews";
+            const isClickable =
+              d.title === "Physical Location" ||
+              d.title === "Email" ||
+              d.title === "Reviews";
             return (
-              <div 
-                key={d.title} 
-                ref={register} 
+              <div
+                key={d.title}
+                ref={register}
                 className={`dept-card${visible[i] ? " in" : ""}${isClickable ? " clickable" : ""}`}
                 onClick={(e) => handleCardClick(e, d)}
-                style={{ cursor: isClickable ? 'pointer' : 'default' }}
+                style={{ cursor: isClickable ? "pointer" : "default" }}
               >
                 <div className="dept-media">{d.media}</div>
                 <div className="dept-body">
@@ -680,12 +722,13 @@ function Departments() {
                   <p>
                     {d.body}
                     {isClickable && (
-                        <span className="click-hint">
-                          {d.title === "Physical Location" && " 🗺️ Click to view map"}
-                          {d.title === "Email" && " ✉️ Click to send email"}
-                          {d.title === "Reviews" && " ⭐ Click to leave a review"}
-                        </span>
-                      )}
+                      <span className="click-hint">
+                        {d.title === "Physical Location" &&
+                          " 🗺️ Click to view map"}
+                        {d.title === "Email" && " ✉️ Click to send email"}
+                        {d.title === "Reviews" && " ⭐ Click to leave a review"}
+                      </span>
+                    )}
                   </p>
                 </div>
               </div>
@@ -693,14 +736,20 @@ function Departments() {
           })}
         </div>
       </div>
-      
+
       {/* Map Popup */}
       <MapPopup isOpen={showMap} onClose={() => setShowMap(false)} />
-      
-      {/* Email Modal */}
-      <EmailModal isOpen={showEmailModal} onClose={() => setShowEmailModal(false)} />
 
-      <ReviewModal isOpen={showReviewModal} onClose={() => setShowReviewModal(false)} />
+      {/* Email Modal */}
+      <EmailModal
+        isOpen={showEmailModal}
+        onClose={() => setShowEmailModal(false)}
+      />
+
+      <ReviewModal
+        isOpen={showReviewModal}
+        onClose={() => setShowReviewModal(false)}
+      />
     </section>
   );
 }
