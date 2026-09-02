@@ -19,7 +19,7 @@
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="4" value="Database" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
-                    <mxGeometry x="680" y="10" width="60" height="80" as="geometry"/>
+                    <mxGeometry x="680" y="10" width="120" height="180" as="geometry"/>
                 </mxCell>
                 <mxCell id="9" style="edgeStyle=none;html=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="5" target="8">
                     <mxGeometry relative="1" as="geometry">
@@ -70,19 +70,63 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="17" value="Fronend UI" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="566" y="300" width="220" height="90" as="geometry"/>
+                    <mxGeometry x="568" y="410" width="220" height="90" as="geometry"/>
                 </mxCell>
                 <mxCell id="22" style="edgeStyle=none;html=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="19" target="17">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="19" value="Email Verification" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="560" y="160" width="120" height="60" as="geometry"/>
+                    <mxGeometry x="493.5" y="220" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="21" value="After Creating Acc in Database" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-                    <mxGeometry x="568" y="100" width="60" height="30" as="geometry"/>
+                    <mxGeometry x="553.5" y="140" width="60" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="23" value="and Then the Account is Ready to use in Frontend" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-                    <mxGeometry x="540" y="240" width="73" height="30" as="geometry"/>
+                    <mxGeometry x="505.5" y="320" width="73" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="iFR7DH3jDm7dG5oxY80B" name="Page-2">
+        <mxGraphModel dx="1294" dy="952" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="Rov21OLeqOGmtMevMeft-1" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;Database Tables Connections&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="130" y="40" width="340" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="Xjx_IjWQ-dww8KsL6u0f-5" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="0klXU5WrSFuFGc4LSCrm-1" target="Xjx_IjWQ-dww8KsL6u0f-1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="0klXU5WrSFuFGc4LSCrm-1" value="&lt;font style=&quot;font-size: 21px;&quot;&gt;Students Info&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="51" y="100" width="208" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="AniUVfH37K_kj9jjlUE0-6" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="Xjx_IjWQ-dww8KsL6u0f-1" target="AniUVfH37K_kj9jjlUE0-3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="AniUVfH37K_kj9jjlUE0-9" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Xjx_IjWQ-dww8KsL6u0f-1" target="AniUVfH37K_kj9jjlUE0-8">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="Xjx_IjWQ-dww8KsL6u0f-1" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Students Info&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="87" y="290" width="130" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="AniUVfH37K_kj9jjlUE0-5" style="edgeStyle=none;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="AniUVfH37K_kj9jjlUE0-1" target="AniUVfH37K_kj9jjlUE0-3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="AniUVfH37K_kj9jjlUE0-1" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;Faculty&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="329" y="301" width="184" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="AniUVfH37K_kj9jjlUE0-3" value="&lt;font style=&quot;font-size: 21px;&quot;&gt;Departments&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="345" y="110" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="AniUVfH37K_kj9jjlUE0-7" value="Another Database" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="300" y="80" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="AniUVfH37K_kj9jjlUE0-8" value="&lt;font style=&quot;font-size: 21px;&quot;&gt;Accounts&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="570" y="120" width="150" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="AniUVfH37K_kj9jjlUE0-10" style="edgeStyle=none;html=1;entryX=0.6;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="AniUVfH37K_kj9jjlUE0-1" target="AniUVfH37K_kj9jjlUE0-8">
+                    <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
