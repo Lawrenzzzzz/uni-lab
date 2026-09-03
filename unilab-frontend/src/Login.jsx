@@ -100,9 +100,6 @@ export default function Login({ onSuccess, onSignUpClick, onBack }) {
       <div className="auth-wrap">
         <div className="auth-panel">
           <BrandMark />
-
-          <h1 className="auth-title">Welcome back</h1>
-
           <p className="auth-subtitle">Log in to access your UNI-Lab workspace.</p>
 
           {errors.form && <FieldError>{errors.form}</FieldError>}
