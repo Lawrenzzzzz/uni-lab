@@ -8,6 +8,8 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import AuthModal from "./AuthModal";
+import SignUp from "./SignUp";
+import Onboarding from "./Onboarding";
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -21,8 +23,7 @@ L.Icon.Default.mergeOptions({
 /* ----------------------------------------------------------------
    Header
 ------------------------------------------------------------------- */
-
-function Header({ onOpenAuth }) {
+function Header({ onSignUpClick }) {
   const [scrolled, setScrolled] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
 
@@ -60,28 +61,21 @@ function Header({ onOpenAuth }) {
 
           <nav className={`links${navOpen ? " open" : ""}`} id="navLinks">
             {NAV_LINKS.map((link, i) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className={i === 0 ? "active" : ""}
-                onClick={closeNav}
-              >
+              <a key={link.href} href={link.href} className={i === 0 ? "active" : ""} onClick={closeNav}>
                 {link.label}
               </a>
             ))}
             <button
+              type="button"
               className="btn btn-primary mobile-portal-btn"
-              onClick={() => {
-                closeNav();
-                onOpenAuth();
-              }}
+              onClick={() => { closeNav(); onSignUpClick(); }}
             >
               Student Portal
             </button>
           </nav>
 
           <div className="nav-right">
-            <button className="btn btn-primary" onClick={onOpenAuth}>
+            <button type="button" className="btn btn-primary" onClick={onSignUpClick}>
               Student Portal
             </button>
             <button
@@ -90,18 +84,13 @@ function Header({ onOpenAuth }) {
               aria-expanded={navOpen}
               onClick={() => setNavOpen((o) => !o)}
             >
-              <span></span>
-              <span></span>
-              <span></span>
+              <span></span><span></span><span></span>
             </button>
           </div>
         </div>
       </header>
 
-      <div
-        className={`nav-backdrop${navOpen ? " open" : ""}`}
-        onClick={closeNav}
-      ></div>
+      <div className={`nav-backdrop${navOpen ? " open" : ""}`} onClick={closeNav}></div>
     </>
   );
 }
@@ -766,16 +755,33 @@ function Footer() {
 ------------------------------------------------------------------- */
 
 export default function App() {
-  const [showAuth, setShowAuth] = useState(false);
+  const [view, setView] = useState("site");
+
+  if (view === "signup") {
+    return (
+      <SignUp
+        onSuccess={() => setView("onboarding")}
+        onBack={() => setView("site")}
+      />
+    );
+  }
+
+  if (view === "onboarding") {
+    return (
+      <Onboarding
+        onDone={() => setView("site")}
+        onBack={() => setView("signup")}
+      />
+    );
+  }
 
   return (
     <div className="unilab-site">
-      <Header onOpenAuth={() => setShowAuth(true)} />
+      <Header onSignUpClick={() => setView("signup")} />
       <Hero />
       <Services />
       <Departments />
       <Footer />
-      <AuthModal isOpen={showAuth} onClose={() => setShowAuth(false)} />
     </div>
   );
 }
