@@ -7,7 +7,7 @@ import logoImg from "./assets/unilab-logo.png";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import AuthModal from "./AuthModal";
+import Login from "./Login";
 import SignUp from "./SignUp";
 import Onboarding from "./Onboarding";
 
@@ -757,11 +757,23 @@ function Footer() {
 export default function App() {
   const [view, setView] = useState("site");
 
+  if (view === "login") {
+    return (
+      <Login
+        onSuccess={() => setView("site")}
+        onSignUpClick={() => setView("signup")}
+        onBack={() => setView("site")}
+        
+      />
+    );
+  }
+
   if (view === "signup") {
     return (
       <SignUp
         onSuccess={() => setView("onboarding")}
         onBack={() => setView("site")}
+        onLoginClick={() => setView("login")}
       />
     );
   }
@@ -777,7 +789,7 @@ export default function App() {
 
   return (
     <div className="unilab-site">
-      <Header onSignUpClick={() => setView("signup")} />
+      <Header onSignUpClick={() => setView("login")} />
       <Hero />
       <Services />
       <Departments />

@@ -48,7 +48,7 @@ function SocialButton({ children }) {
   );
 }
 
-export default function SignUp({ onSuccess, onBack }) {
+export default function SignUp({ onSuccess, onBack, onLoginClick }) {
   const [showPw, setShowPw] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [values, setValues] = useState({ name: "", email: "", password: "", confirm: "" });
@@ -178,9 +178,9 @@ export default function SignUp({ onSuccess, onBack }) {
             </div>
 
         <p className="auth-footnote">
-          Already have an account?{" "}
-          <a href="#" onClick={(e) => { e.preventDefault(); onBack(); }}>Log in</a>
-        </p>
+            Already have an account?{" "}
+            <a href="#" onClick={(e) => { e.preventDefault(); onLoginClick(); }}>Log in</a>
+            </p>
         <p className="auth-footnote auth-footnote--mono">Protected by UNI-Lab security</p>
 
         <button type="button" className="auth-back" onClick={onBack}>
