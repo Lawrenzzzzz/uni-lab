@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 import logoImg from "./assets/unilab-logo.png";
+import { apiPost } from "./api";
 
 const STEPS = ["Details", "Course", "Verify"];
 
@@ -63,6 +64,7 @@ export default function Onboarding({ onDone, onBack }) {
   const [course, setCourse] = useState(null);
   const [code, setCode] = useState(["", "", "", "", "", ""]);
   const [done, setDone] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const codeRefs = useRef([]);
 
   const codeValue = useMemo(() => code.join(""), [code]);
@@ -84,11 +86,40 @@ export default function Onboarding({ onDone, onBack }) {
     return Object.keys(next).length === 0;
   };
 
-  const handleNext = (e) => {
+  const handleNext = async (e) => {
     e.preventDefault();
     if (!validateStep()) return;
-    if (step < 2) setStep(step + 1);
-    else setDone(true);
+
+    if (step < 2) {
+      setStep(step + 1);
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const { ok, data } = await apiPost("/auth/onboarding/", {
+        age: Number(details.age),
+        birthday: details.birthday,
+        course,
+      });
+      if (!ok) {
+        setErrors({
+          code:
+            data.non_field_errors?.join(" ") ||
+            data.age?.join(" ") ||
+            data.birthday?.join(" ") ||
+            data.course?.join(" ") ||
+            data.detail ||
+            "Could not save your profile. Please try again.",
+        });
+        return;
+      }
+      setDone(true);
+    } catch {
+      setErrors({ code: "Could not reach the server. Please try again." });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleBack = () => {
@@ -251,8 +282,8 @@ export default function Onboarding({ onDone, onBack }) {
               <button type="button" className="btn btn-outline-dark" onClick={handleBack}>
                 Back
               </button>
-              <button type="submit" className="btn btn-primary auth-btn-flex">
-                {step === 2 ? "Verify & finish" : "Next"}
+              <button type="submit" className="btn btn-primary auth-btn-flex" disabled={submitting}>
+                {submitting ? "Saving..." : step === 2 ? "Verify & finish" : "Next"}
               </button>
             </div>
           </form>

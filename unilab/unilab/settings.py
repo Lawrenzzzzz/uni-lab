@@ -102,29 +102,30 @@ WSGI_APPLICATION = 'unilab.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('ACCOUNTS_DB_NAME', 'accounts'),
+        'USER': os.environ.get('DB_USER', 'unilab'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'unilab_pw'),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', '3306'),
+        'OPTIONS': {'charset': 'utf8mb4', 'sql_mode': 'STRICT_TRANS_TABLES'},
+    },
+    'students_db': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('STUDENTS_DB_NAME', 'students'),
+        'USER': os.environ.get('DB_USER', 'unilab'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'unilab_pw'),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', '3306'),
+        'OPTIONS': {'charset': 'utf8mb4', 'sql_mode': 'STRICT_TRANS_TABLES'},
+    },
 }
 
+DATABASE_ROUTERS = ['main.db_router.StudentsRouter']
 
-# Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
-
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
+# Swap in our custom user model backed by accounts.users instead of
+# Django's built-in auth_user table.
+AUTH_USER_MODEL = 'main.User'
 
 
 # Internationalization

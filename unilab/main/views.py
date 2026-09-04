@@ -1,5 +1,5 @@
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import authenticate, login as django_login, get_user_model
@@ -7,10 +7,22 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError as DjangoValidationError
 from django.core.mail import EmailMessage
 from django.conf import settings
+from django.views.decorators.csrf import ensure_csrf_cookie
 
-from .serializers import SignupSerializer
+from .serializers import SignupSerializer, OnboardingSerializer
 
 User = get_user_model()
+
+
+@api_view(['GET'])
+@ensure_csrf_cookie
+@authentication_classes([])
+@permission_classes([AllowAny])
+def csrf(request):
+    """Sets the csrftoken cookie. The frontend calls this once (e.g. on
+    load) so it has a token to send back as X-CSRFToken on state-changing
+    requests made while a session is active (e.g. /auth/onboarding/)."""
+    return Response({"detail": "CSRF cookie set."})
 
 
 @api_view(['POST'])
@@ -57,6 +69,10 @@ def signup(request):
     serializer = SignupSerializer(data=request.data)
     if serializer.is_valid():
         user = serializer.save()
+        # Log the user in immediately so the Onboarding step (which
+        # needs to know who to attach the student_profile row to)
+        # can rely on request.user / the session.
+        django_login(request, user)
         return Response(
             {"message": "Account created successfully.", "email": user.email},
             status=status.HTTP_201_CREATED,
@@ -88,9 +104,24 @@ def login_view(request):
     except User.DoesNotExist:
         return Response({"detail": "Invalid email or password."}, status=status.HTTP_400_BAD_REQUEST)
 
-    user = authenticate(request, username=user_obj.username, password=password)
+    user = authenticate(request, username=user_obj.email, password=password)
     if user is None:
         return Response({"detail": "Invalid email or password."}, status=status.HTTP_400_BAD_REQUEST)
 
     django_login(request, user)
     return Response({"message": "Logged in successfully.", "email": user.email})
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def onboarding(request):
+    """Saves the Onboarding.jsx Details + Course steps into
+    students.student_profile for the currently logged-in user."""
+    serializer = OnboardingSerializer(data=request.data, context={"user": request.user})
+    if serializer.is_valid():
+        serializer.save()
+        return Response(
+            {"message": "Profile completed."},
+            status=status.HTTP_201_CREATED,
+        )
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

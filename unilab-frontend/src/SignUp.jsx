@@ -1,5 +1,6 @@
 import { useState } from "react";
 import logoImg from "./assets/unilab-logo.png";
+import { apiPost } from "./api";
 
 function AuroraBackground() {
   return (
@@ -53,13 +54,14 @@ export default function SignUp({ onSuccess, onBack, onLoginClick }) {
   const [showConfirm, setShowConfirm] = useState(false);
   const [values, setValues] = useState({ name: "", email: "", password: "", confirm: "" });
   const [errors, setErrors] = useState({});
+  const [submitting, setSubmitting] = useState(false);
 
   const set = (key) => (e) => {
     setValues((v) => ({ ...v, [key]: e.target.value }));
     setErrors((prev) => ({ ...prev, [key]: undefined }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const next = {};
     const name = values.name.trim();
@@ -75,8 +77,35 @@ export default function SignUp({ onSuccess, onBack, onLoginClick }) {
     if (values.confirm !== values.password) next.confirm = "Passwords don't match — please re-enter.";
 
     setErrors(next);
-    if (Object.keys(next).length === 0) {
+    if (Object.keys(next).length > 0) return;
+
+    setSubmitting(true);
+    try {
+      const { ok, data } = await apiPost("/auth/signup/", {
+        full_name: name,
+        email,
+        password: values.password,
+        confirm_password: values.confirm,
+      });
+
+      if (!ok) {
+        // Map Django/DRF field errors (full_name, email, password,
+        // confirm_password) back onto this form's local field names.
+        setErrors({
+          name: data.full_name?.join(" "),
+          email: data.email?.join(" "),
+          password: data.password?.join(" "),
+          confirm: data.confirm_password?.join(" ") || data.non_field_errors?.join(" "),
+          form: typeof data.detail === "string" ? data.detail : undefined,
+        });
+        return;
+      }
+
       onSuccess();
+    } catch {
+      setErrors({ form: "Could not reach the server. Please try again." });
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -90,6 +119,8 @@ export default function SignUp({ onSuccess, onBack, onLoginClick }) {
             <h1 className="auth-title">Create your account</h1>
 
             <p className="auth-subtitle">Set up a secure login to start using UNI-Lab.</p>
+
+            {errors.form && <FieldError>{errors.form}</FieldError>}
 
             <form className="auth-form" onSubmit={handleSubmit} noValidate>
                 <div className="field-group">
@@ -160,8 +191,8 @@ export default function SignUp({ onSuccess, onBack, onLoginClick }) {
                 {errors.confirm && <FieldError>{errors.confirm}</FieldError>}
                 </div>
 
-                <button type="submit" className="btn btn-primary auth-submit">
-                Create account
+                <button type="submit" className="btn btn-primary auth-submit" disabled={submitting}>
+                {submitting ? "Creating account..." : "Create account"}
                 </button>
             </form>
 
@@ -178,9 +209,9 @@ export default function SignUp({ onSuccess, onBack, onLoginClick }) {
             </div>
 
         <p className="auth-footnote">
-            Already have an account?{" "}
-            <a href="#" onClick={(e) => { e.preventDefault(); onLoginClick(); }}>Log in</a>
-            </p>
+          Already have an account?{" "}
+          <a href="#" onClick={(e) => { e.preventDefault(); onLoginClick(); }}>Log in</a>
+        </p>
         <p className="auth-footnote auth-footnote--mono">Protected by UNI-Lab security</p>
 
         <button type="button" className="auth-back" onClick={onBack}>
