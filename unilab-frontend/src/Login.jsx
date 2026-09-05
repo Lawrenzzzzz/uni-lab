@@ -145,16 +145,6 @@ export default function Login({ onSuccess, onSignUpClick, onBack }) {
             </button>
           </form>
 
-          <div className="auth-divider">
-            <span />
-            <p>or continue with</p>
-            <span />
-          </div>
-
-          <div className="auth-social-grid">
-            <SocialButton><strong>G</strong> Google</SocialButton>
-            <SocialButton>Apple</SocialButton>
-          </div>
         </div>
 
         <p className="auth-footnote">

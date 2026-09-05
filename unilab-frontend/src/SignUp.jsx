@@ -195,18 +195,7 @@ export default function SignUp({ onSuccess, onBack, onLoginClick }) {
                 {submitting ? "Creating account..." : "Create account"}
                 </button>
             </form>
-
-            <div className="auth-divider">
-                <span />
-                <p>or continue with</p>
-                <span />
-            </div>
-
-            <div className="auth-social-grid">
-                <SocialButton><strong>G</strong> Google</SocialButton>
-                <SocialButton>Apple</SocialButton>
-            </div>
-            </div>
+          </div>
 
         <p className="auth-footnote">
           Already have an account?{" "}
