@@ -200,7 +200,7 @@ export default function Onboarding({ onDone, onBack }) {
             <h1 className="auth-title">You're all set</h1>
             <p className="auth-subtitle">Your profile is complete. UNI-Lab is ready whenever you are.</p>
             <button type="button" className="btn btn-primary auth-submit" onClick={onDone}>
-              Back to start
+              Go to Dashboard
             </button>
           </div>
         </div>

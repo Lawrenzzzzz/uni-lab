@@ -10,6 +10,7 @@ import L from "leaflet";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import Onboarding from "./Onboarding";
+import Dashboard from "./Dashboard";
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -760,7 +761,7 @@ export default function App() {
   if (view === "login") {
     return (
       <Login
-        onSuccess={() => setView("site")}
+        onSuccess={() => setView("dashboard")}
         onSignUpClick={() => setView("signup")}
         onBack={() => setView("site")}
         
@@ -781,10 +782,14 @@ export default function App() {
   if (view === "onboarding") {
     return (
       <Onboarding
-        onDone={() => setView("site")}
+        onDone={() => setView("dashboard")}
         onBack={() => setView("signup")}
       />
     );
+  }
+
+  if (view === "dashboard") {
+    return <Dashboard onLogout={() => setView("site")} />;
   }
 
   return (
