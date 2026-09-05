@@ -1,6 +1,9 @@
+import random
+
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.db import models
 from django.utils import timezone
+from datetime import timedelta
 
 
 class UserManager(BaseUserManager):
@@ -91,3 +94,52 @@ class StudentProfile(models.Model):
 
     def __str__(self):
         return f"{self.user_id} — {self.course or 'no course'}"
+
+
+class EmailVerificationCode(models.Model):
+    """
+    One-time 6-digit codes used to verify a user's email address during
+    onboarding. This is a brand-new table (not part of accounts.sql or
+    students.sql) so it's fully managed by Django migrations and lives
+    on the `default` (accounts) connection, same as User.
+    """
+
+    CODE_LIFETIME = timedelta(minutes=10)
+    MAX_ATTEMPTS = 5
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="verification_codes",
+    )
+    code = models.CharField(max_length=6)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField()
+    attempts = models.PositiveSmallIntegerField(default=0)
+    consumed_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        db_table = "email_verification_codes"
+
+    def __str__(self):
+        return f"code for {self.user_id} (expires {self.expires_at:%Y-%m-%d %H:%M})"
+
+    @classmethod
+    def generate_for(cls, user):
+        """Invalidate any codes still outstanding for this user and
+        issue a fresh one."""
+        cls.objects.filter(user=user, consumed_at__isnull=True).update(
+            consumed_at=timezone.now()
+        )
+        code = f"{random.randint(0, 999999):06d}"
+        return cls.objects.create(
+            user=user,
+            code=code,
+            expires_at=timezone.now() + cls.CODE_LIFETIME,
+        )
+
+    def is_expired(self):
+        return timezone.now() >= self.expires_at
+
+    def is_usable(self):
+        return self.consumed_at is None and not self.is_expired() and self.attempts < self.MAX_ATTEMPTS

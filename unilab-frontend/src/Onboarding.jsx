@@ -65,9 +65,31 @@ export default function Onboarding({ onDone, onBack }) {
   const [code, setCode] = useState(["", "", "", "", "", ""]);
   const [done, setDone] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [sendingCode, setSendingCode] = useState(false);
+  const [codeSentMsg, setCodeSentMsg] = useState("");
+  const [verified, setVerified] = useState(false);
   const codeRefs = useRef([]);
 
   const codeValue = useMemo(() => code.join(""), [code]);
+
+  const sendVerificationCode = async () => {
+    setSendingCode(true);
+    setCodeSentMsg("");
+    try {
+      const { ok, data } = await apiPost("/auth/verify-email/send/", {});
+      if (ok) {
+        setCodeSentMsg(`We sent a code to ${data.email || "your email"}.`);
+      } else if (data.detail?.toLowerCase().includes("already verified")) {
+        setVerified(true);
+      } else {
+        setErrors((p) => ({ ...p, code: data.detail || "Could not send the code. Try again." }));
+      }
+    } catch {
+      setErrors((p) => ({ ...p, code: "Could not reach the server. Please try again." }));
+    } finally {
+      setSendingCode(false);
+    }
+  };
 
   const validateStep = () => {
     const next = {};
@@ -90,6 +112,14 @@ export default function Onboarding({ onDone, onBack }) {
     e.preventDefault();
     if (!validateStep()) return;
 
+    if (step === 1) {
+      // Moving into the Verify step — fire off the code right away so
+      // it's already on its way by the time the user sees the inputs.
+      setStep(2);
+      sendVerificationCode();
+      return;
+    }
+
     if (step < 2) {
       setStep(step + 1);
       return;
@@ -97,6 +127,15 @@ export default function Onboarding({ onDone, onBack }) {
 
     setSubmitting(true);
     try {
+      if (!verified) {
+        const { ok, data } = await apiPost("/auth/verify-email/", { code: codeValue });
+        if (!ok) {
+          setErrors({ code: data.code?.join(" ") || data.detail || "That code isn't right. Please try again." });
+          return;
+        }
+        setVerified(true);
+      }
+
       const { ok, data } = await apiPost("/auth/onboarding/", {
         age: Number(details.age),
         birthday: details.birthday,
@@ -120,6 +159,13 @@ export default function Onboarding({ onDone, onBack }) {
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const handleResend = async () => {
+    setCode(["", "", "", "", "", ""]);
+    setErrors((p) => ({ ...p, code: undefined }));
+    codeRefs.current[0]?.focus();
+    await sendVerificationCode();
   };
 
   const handleBack = () => {
@@ -263,6 +309,7 @@ export default function Onboarding({ onDone, onBack }) {
                       value={digit}
                       onChange={(e) => setDigit(i, e.target.value)}
                       onKeyDown={(e) => handleDigitKey(i, e)}
+                      disabled={sendingCode}
                       className={`field-input code-input${errors.code ? " field-input-error" : ""}`}
                     />
                   ))}
@@ -271,8 +318,17 @@ export default function Onboarding({ onDone, onBack }) {
                   <FieldError>{errors.code}</FieldError>
                 ) : (
                   <p className="field-hint">
-                    Didn't get it?{" "}
-                    <button type="button" className="auth-link-btn">Resend code</button>
+                    {sendingCode
+                      ? "Sending code..."
+                      : codeSentMsg || "Didn't get it?"}{" "}
+                    <button
+                      type="button"
+                      className="auth-link-btn"
+                      onClick={handleResend}
+                      disabled={sendingCode}
+                    >
+                      Resend code
+                    </button>
                   </p>
                 )}
               </div>
@@ -282,7 +338,11 @@ export default function Onboarding({ onDone, onBack }) {
               <button type="button" className="btn btn-outline-dark" onClick={handleBack}>
                 Back
               </button>
-              <button type="submit" className="btn btn-primary auth-btn-flex" disabled={submitting}>
+              <button
+                type="submit"
+                className="btn btn-primary auth-btn-flex"
+                disabled={submitting || (step === 2 && sendingCode)}
+              >
                 {submitting ? "Saving..." : step === 2 ? "Verify & finish" : "Next"}
               </button>
             </div>
