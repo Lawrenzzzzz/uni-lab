@@ -35,28 +35,90 @@ const NAV = [
 ];
 
 const STATS = [
-  { label: "Attendance rate", value: "94.6%", note: "On Track", detail: "Minimum requirement: 85%", icon: Clock3 },
-  { label: "Cumulative GPA", value: "3.84", note: "+0.12", detail: "Top 5% of your class", icon: Award },
-  { label: "Credits completed", value: "78 / 120", note: "Junior", detail: "65% completion rate", icon: Target },
-  { label: "Active courses", value: "6 Courses", note: "Fall '26", detail: "18 total weekly hours", icon: BookOpen },
+  {
+    label: "Attendance rate",
+    value: "94.6%",
+    note: "On Track",
+    detail: "Minimum requirement: 85%",
+    icon: Clock3,
+  },
+  {
+    label: "Cumulative GPA",
+    value: "3.84",
+    note: "+0.12",
+    detail: "Top 5% of your class",
+    icon: Award,
+  },
+  {
+    label: "Credits completed",
+    value: "78 / 120",
+    note: "Junior",
+    detail: "65% completion rate",
+    icon: Target,
+  },
+  {
+    label: "Active courses",
+    value: "6 Courses",
+    note: "Fall '26",
+    detail: "18 total weekly hours",
+    icon: BookOpen,
+  },
 ];
 
 const ASSIGNMENTS = [
-  { title: "Interactive Web App Draft", course: "CS 302 · Human Computer Interaction", due: "Due in 4 Hours", icon: FileText, tone: "danger", weight: 15 },
-  { title: "Linear Regression Problem Set", course: "MATH 221 · Applied Statistics", due: "Due Tomorrow", icon: FileText, tone: "warning", weight: 10 },
-  { title: "Brand Communication Analysis", course: "MKT 315 · Marketing Principles", due: "Due in 5 Days", icon: FileText, tone: "info", weight: 10 },
+  {
+    title: "Interactive Web App Draft",
+    course: "CS 302 · Human Computer Interaction",
+    due: "Due in 4 Hours",
+    icon: FileText,
+    tone: "danger",
+    weight: 15,
+  },
+  {
+    title: "Linear Regression Problem Set",
+    course: "MATH 221 · Applied Statistics",
+    due: "Due Tomorrow",
+    icon: FileText,
+    tone: "warning",
+    weight: 10,
+  },
+  {
+    title: "Brand Communication Analysis",
+    course: "MKT 315 · Marketing Principles",
+    due: "Due in 5 Days",
+    icon: FileText,
+    tone: "info",
+    weight: 10,
+  },
 ];
 
 const GRADES = [
-  ["Database Systems & Design", "CS 340 · Prof. Higgins", "Midterm Project", "96 / 100", "Excellent"],
+  [
+    "Database Systems & Design",
+    "CS 340 · Prof. Higgins",
+    "Midterm Project",
+    "96 / 100",
+    "Excellent",
+  ],
   ["Applied Statistics", "MATH 221 · Dr. Kovács", "Quiz 3", "88 / 100", "Good"],
-  ["Creative Writing Seminar", "ENGL 201 · Prof. Vance", "Short Story Essay", "91 / 100", "Excellent"],
+  [
+    "Creative Writing Seminar",
+    "ENGL 201 · Prof. Vance",
+    "Short Story Essay",
+    "91 / 100",
+    "Excellent",
+  ],
 ];
 
 const SCHEDULE = [
   ["09:00", "10:30 AM", "Applied Statistics", "Room 208 · Dr. Kovács"],
   ["11:00", "12:30 PM", "Database Systems", "Lab 3 · Prof. Higgins"],
-  ["14:00", "3:30 PM", "Human Computer Interaction", "Design Studio · Prof. Lin"],
+  [
+    "14:00",
+    "3:30 PM",
+    "Human Computer Interaction",
+    "Design Studio · Prof. Lin",
+  ],
 ];
 
 const ANNOUNCEMENTS = [
@@ -123,7 +185,12 @@ function Profile({ name, studentId, onLogout }) {
         <p className="dash-profile-name">{name}</p>
         <p className="dash-profile-id">ID: {studentId}</p>
       </div>
-      <button type="button" className="dash-profile-logout" onClick={onLogout} title="Log out">
+      <button
+        type="button"
+        className="dash-profile-logout"
+        onClick={onLogout}
+        title="Log out"
+      >
         ⏻
       </button>
     </div>
@@ -153,7 +220,11 @@ function Panel({ title, icon: Icon, action, children, className = "" }) {
    Dashboard
 ------------------------------------------------------------------- */
 
-export default function Dashboard({ studentName = "Student", studentId = "8948271", onLogout }) {
+export default function Dashboard({
+  studentName = "Student",
+  studentId = "8948271",
+  onLogout,
+}) {
   const [navOpen, setNavOpen] = useState(false);
   const [active, setActive] = useState("Dashboard");
 
@@ -177,9 +248,17 @@ export default function Dashboard({ studentName = "Student", studentId = "894827
       </aside>
 
       {/* Mobile drawer */}
-      <div className={`dash-mobile-backdrop${navOpen ? " open" : ""}`} onClick={closeNav} />
+      <div
+        className={`dash-mobile-backdrop${navOpen ? " open" : ""}`}
+        onClick={closeNav}
+      />
       <aside className={`dash-mobile-sidebar${navOpen ? " open" : ""}`}>
-        <button type="button" className="dash-mobile-close" onClick={closeNav} aria-label="Close menu">
+        <button
+          type="button"
+          className="dash-mobile-close"
+          onClick={closeNav}
+          aria-label="Close menu"
+        >
           ×
         </button>
         <Brand />
@@ -216,7 +295,11 @@ export default function Dashboard({ studentName = "Student", studentId = "894827
                 <Search size={16} />
                 <input type="text" placeholder="Search courses, tasks…" />
               </label>
-              <button type="button" className="dash-bell" aria-label="Notifications">
+              <button
+                type="button"
+                className="dash-bell"
+                aria-label="Notifications"
+              >
                 <Bell size={18} />
                 <span className="dash-bell-dot" />
               </button>
@@ -225,7 +308,11 @@ export default function Dashboard({ studentName = "Student", studentId = "894827
 
           <div className="dash-stats">
             {STATS.map(({ label, value, note, detail, icon: Icon }, i) => (
-              <article className="dash-stat-card" key={label} style={{ animationDelay: `${i * 70}ms` }}>
+              <article
+                className="dash-stat-card"
+                key={label}
+                style={{ animationDelay: `${i * 70}ms` }}
+              >
                 <div className="dash-stat-top">
                   <p className="dash-stat-label">{label}</p>
                   <span className="dash-stat-icon">
@@ -243,28 +330,45 @@ export default function Dashboard({ studentName = "Student", studentId = "894827
 
           <div className="dash-content-grid">
             <div className="dash-col">
-              <Panel title="Assignment Deadlines" icon={CalendarDays} action="View All">
+              <Panel
+                title="Assignment Deadlines"
+                icon={CalendarDays}
+                action="View All"
+              >
                 <div className="dash-assignments">
-                  {ASSIGNMENTS.map(({ title, course, due, icon: Icon, tone, weight }) => (
-                    <button type="button" className="dash-assignment-row" key={title}>
-                      <span className={`dash-assignment-icon ${tone}`}>
-                        <Icon size={16} />
-                      </span>
-                      <span className="dash-assignment-text">
-                        <strong>{title}</strong>
-                        <span>{course}</span>
-                      </span>
-                      <span className={`dash-assignment-due tone-${tone}`}>
-                        <strong>{due}</strong>
-                        <span>Weight: {weight}%</span>
-                      </span>
-                      <ChevronRight size={16} className="dash-assignment-chevron" />
-                    </button>
-                  ))}
+                  {ASSIGNMENTS.map(
+                    ({ title, course, due, icon: Icon, tone, weight }) => (
+                      <button
+                        type="button"
+                        className="dash-assignment-row"
+                        key={title}
+                      >
+                        <span className={`dash-assignment-icon ${tone}`}>
+                          <Icon size={16} />
+                        </span>
+                        <span className="dash-assignment-text">
+                          <strong>{title}</strong>
+                          <span>{course}</span>
+                        </span>
+                        <span className={`dash-assignment-due tone-${tone}`}>
+                          <strong>{due}</strong>
+                          <span>Weight: {weight}%</span>
+                        </span>
+                        <ChevronRight
+                          size={16}
+                          className="dash-assignment-chevron"
+                        />
+                      </button>
+                    ),
+                  )}
                 </div>
               </Panel>
 
-              <Panel title="Recent Academic Results" icon={Award} action="Full Transcript">
+              <Panel
+                title="Recent Academic Results"
+                icon={Award}
+                action="Full Transcript"
+              >
                 <div className="dash-table-scroll">
                   <table className="dash-table">
                     <thead>
@@ -276,19 +380,25 @@ export default function Dashboard({ studentName = "Student", studentId = "894827
                       </tr>
                     </thead>
                     <tbody>
-                      {GRADES.map(([course, code, assessment, score, status]) => (
-                        <tr key={course}>
-                          <td>
-                            <strong>{course}</strong>
-                            <span>{code}</span>
-                          </td>
-                          <td>{assessment}</td>
-                          <td className="dash-score">{score}</td>
-                          <td>
-                            <span className={`dash-status${status === "Good" ? " neutral" : ""}`}>{status}</span>
-                          </td>
-                        </tr>
-                      ))}
+                      {GRADES.map(
+                        ([course, code, assessment, score, status]) => (
+                          <tr key={course}>
+                            <td>
+                              <strong>{course}</strong>
+                              <span>{code}</span>
+                            </td>
+                            <td>{assessment}</td>
+                            <td className="dash-score">{score}</td>
+                            <td>
+                              <span
+                                className={`dash-status${status === "Good" ? " neutral" : ""}`}
+                              >
+                                {status}
+                              </span>
+                            </td>
+                          </tr>
+                        ),
+                      )}
                     </tbody>
                   </table>
                 </div>
@@ -305,7 +415,9 @@ export default function Dashboard({ studentName = "Student", studentId = "894827
                         <span>{range}</span>
                       </div>
                       <div className="dash-schedule-body">
-                        <span className={`dash-schedule-dot${i === 0 ? " active" : ""}`} />
+                        <span
+                          className={`dash-schedule-dot${i === 0 ? " active" : ""}`}
+                        />
                         <strong>{course}</strong>
                         <span>{room}</span>
                       </div>
@@ -317,7 +429,10 @@ export default function Dashboard({ studentName = "Student", studentId = "894827
               <Panel title="Announcements" icon={Megaphone}>
                 <div className="dash-announcements">
                   {ANNOUNCEMENTS.map((a, i) => (
-                    <article key={a.title} className={i > 0 ? "with-border" : ""}>
+                    <article
+                      key={a.title}
+                      className={i > 0 ? "with-border" : ""}
+                    >
                       <div className="dash-announce-head">
                         <strong className={`tone-${a.tone}`}>{a.tag}</strong>
                         <time>{a.time}</time>
