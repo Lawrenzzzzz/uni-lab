@@ -132,8 +132,8 @@ function Profile({ name, studentId, onLogout }) {
 
 function Panel({ title, icon: Icon, action, children, className = "" }) {
   return (
-    <section className={`dash-panel ${className}`}>
-      <header className="dash-panel-header">
+    <div className={`dash-panel ${className}`}>
+      <div className="dash-panel-header">
         <h2>
           <Icon size={15} />
           {title}
@@ -143,9 +143,9 @@ function Panel({ title, icon: Icon, action, children, className = "" }) {
             {action}
           </button>
         )}
-      </header>
+      </div>
       {children}
-    </section>
+    </div>
   );
 }
 
@@ -195,7 +195,7 @@ export default function Dashboard({ studentName = "Student", studentId = "894827
 
       <main className="dash-main">
         <div className="dash-wrap">
-          <header className="dash-topbar">
+          <div className="dash-topbar">
             <button
               type="button"
               className="dash-menu-btn"
@@ -221,7 +221,7 @@ export default function Dashboard({ studentName = "Student", studentId = "894827
                 <span className="dash-bell-dot" />
               </button>
             </div>
-          </header>
+          </div>
 
           <div className="dash-stats">
             {STATS.map(({ label, value, note, detail, icon: Icon }, i) => (
