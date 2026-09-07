@@ -265,6 +265,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 0;
+  color: black;
+  text-align: left;
 }
 .dash-title-block p {
   display: none;
@@ -281,6 +283,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  justify-content: flex-end;
 }
 .dash-search {
   position: relative;
@@ -350,6 +353,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
+  
 }
 @media (min-width: 1080px) {
   .dash-stats {
