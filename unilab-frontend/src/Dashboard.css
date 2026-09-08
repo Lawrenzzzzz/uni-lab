@@ -218,10 +218,11 @@
 }
 
 .dash-topbar {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  display: flex;
   align-items: center;
-  gap: 14px;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
 }
 
 .dash-menu-btn {
@@ -234,6 +235,7 @@
   border: 1px solid #e2e8f0;
   background: #fff;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 @media (min-width: 961px) {
@@ -242,12 +244,18 @@
   }
 }
 
+.dash-title-block {
+  flex: 1;
+  min-width: 0;
+}
+
 .dash-title-block h1 {
   font-size: 21px;
   font-weight: 700;
   font-family: "Playfair Display", serif;
   margin: 0;
   color: #000;
+  line-height: 1.2;
 }
 
 .dash-title-block p {
@@ -260,6 +268,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .dash-search {
@@ -381,6 +390,7 @@
 .dash-content-grid {
   margin-top: 20px;
   display: grid;
+  grid-template-columns: 1fr;
   gap: 18px;
 }
 
@@ -408,6 +418,7 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 16px;
+  width: 100%;
 }
 
 .dash-panel-header h2 {
@@ -487,7 +498,6 @@
 .dash-status { display: inline-flex; padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 600; background: rgba(61, 193, 85, 0.12); color: #2ecc71; }
 .dash-status.neutral { background: #f4f3ec; color: #64748b; }
 
-/* ---------- Schedule ---------- */
 /* ---------- Today's Schedule Card ---------- */
 .dash-schedule {
   display: flex;
