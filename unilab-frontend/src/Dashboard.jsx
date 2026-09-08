@@ -81,7 +81,7 @@ const SCHEDULE = [
 
 const ANNOUNCEMENTS = [
   {
-    tag: "Campus Info",
+    tag: "",
     tone: "primary",
     time: "2 Hours Ago",
     title: "Fall semester career fair registration now open",
