@@ -301,6 +301,7 @@
   padding: 10px 12px 10px 36px;
   font-size: 13.5px;
   outline: none;
+  color: #000;
 }
 
 .dash-bell {
@@ -314,6 +315,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  color: #000;
 }
 
 .dash-bell-dot {
@@ -324,6 +326,7 @@
   height: 6px;
   border-radius: 50%;
   background: var(--danger);
+  color: #e5484d;
 }
 
 /* ---------- Stat Cards ---------- */
