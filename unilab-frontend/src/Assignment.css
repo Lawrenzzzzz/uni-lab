@@ -1,0 +1,428 @@
+/* ==================================================================
+   Assignments — light theme matching the main dashboard.
+   Scoped under .assignments-shell to avoid conflicts.
+=================================================================== */
+
+.assignments-shell {
+  /* Remove dark background & padding – inherit from dash-wrap */
+  background: transparent;
+  padding: 10px;
+}
+
+/* The main card becomes a standard dash-panel */
+.assignments-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 15px 24px 28px;
+  margin: 0;
+  box-shadow: none;
+  position: relative;
+}
+
+/* ---------- Tabs ---------- */
+.asg-tabs {
+  display: flex;
+  gap: 26px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-top: 4px;
+  margin-bottom: 4px;
+}
+
+.asg-tab {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px 2px 14px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #8993a4;
+  position: relative;
+  font-family: "Inter", sans-serif;
+  transition: color 0.2s;
+}
+
+.asg-tab:hover {
+  color: #161b26;
+}
+
+.asg-tab.active {
+  color: #f2a83e; /* amber from dashboard */
+}
+
+.asg-tab.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: #f2a83e;
+  border-radius: 2px;
+}
+
+/* ---------- Toolbar / class filter ---------- */
+.asg-toolbar {
+  padding: 16px 0 10px;
+}
+
+.asg-select-wrap {
+  position: relative;
+  display: inline-flex;
+  width: 220px;
+}
+
+.asg-select {
+  appearance: none;
+  width: 100%;
+  border: 1px solid #f2a83e;
+  border-radius: 6px;
+  background: #fff;
+  padding: 9px 32px 9px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #161b26;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+}
+
+.asg-select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(242, 168, 62, 0.25);
+}
+
+.asg-select-chevron {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #f2a83e;
+  pointer-events: none;
+}
+
+/* ---------- Buckets / accordion ---------- */
+.asg-buckets {
+  margin-top: 6px;
+}
+
+.asg-bucket {
+  border-top: 1px solid #e2e8f0;
+}
+
+.asg-bucket:first-child {
+  border-top: none;
+}
+
+.asg-bucket-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 14px 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #161b26;
+  font-family: "Inter", sans-serif;
+}
+
+.asg-bucket-head:hover {
+  background: #f8fafc;
+  border-radius: 6px;
+}
+
+.asg-bucket-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #8993a4;
+}
+
+.asg-bucket-count {
+  font-size: 12.5px;
+  font-weight: 600;
+  min-width: 14px;
+  text-align: right;
+}
+
+.asg-bucket-body {
+  padding-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Assignment row ---------- */
+.asg-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 10px 8px;
+  transition: background 0.15s ease;
+}
+
+.asg-row:hover {
+  background: #f4f5f7;
+}
+
+.asg-row-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: rgba(242, 168, 62, 0.12);
+  color: #f2a83e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.asg-row-text {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding-bottom: 10px;
+}
+
+.asg-row-text strong {
+  font-size: 13px;
+  font-weight: 700;
+  color: #161b26;
+  text-transform: Capitalize;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-bottom:5px;
+}
+
+.asg-row-text > span {
+  font-size: 12px;
+  color: #565f70;
+  padding-bottom: 5px;
+  font-style: italic;
+}
+
+.asg-row-date {
+  font-size: 11px;
+  color: #8993a4;
+}
+
+.asg-row-done {
+  color: #2ecc71;
+  flex-shrink: 0;
+}
+
+.asg-empty {
+  padding: 12px 8px 18px;
+  margin: 0;
+  font-size: 12.5px;
+  color: #8993a4;
+  font-style: italic;
+}
+
+.asg-view-all {
+  align-self: center;
+  margin-top: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #f2a83e;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 6px;
+}
+
+.asg-view-all:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Missing / Done flat list ---------- */
+.asg-flat-list {
+  display: flex;
+  flex-direction: column;
+  padding-top: 6px;
+}
+
+/* ---------- Help button (optional) ---------- */
+.asg-help {
+  position: absolute;
+  right: 20px;
+  bottom: -20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f2a83e;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 20px -6px rgba(242, 168, 62, 0.5);
+}
+
+.asg-help:hover {
+  filter: brightness(1.08);
+}
+
+/* ---------- Detail modal ---------- */
+.asg-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.asg-modal {
+  position: relative;
+  background: #fff;
+  border-radius: 14px;
+  padding: 30px;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+}
+
+.asg-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #e2e8f0;
+  background: #f9fafb;
+  color: #565f70;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.asg-modal-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  background: rgba(242, 168, 62, 0.12);
+  color: #f2a83e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.asg-modal h3 {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-family: "Playfair Display", serif;
+  color: #161b26;
+}
+
+.asg-modal-course {
+  margin: 0 0 18px;
+  font-size: 13px;
+  color: #565f70;
+}
+
+.asg-modal-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 0 18px;
+  padding: 14px 0;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.asg-modal-meta div {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.asg-modal-meta dt {
+  font-size: 12px;
+  color: #8993a4;
+}
+
+.asg-modal-meta dd {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #161b26;
+  text-align: right;
+}
+
+.asg-status-pill {
+  display: inline-flex;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 11px !important;
+}
+
+.asg-status-pill.status-assigned {
+  background: rgba(242, 168, 62, 0.12);
+  color: #f2a83e;
+}
+
+.asg-status-pill.status-missing {
+  background: rgba(229, 72, 77, 0.12);
+  color: #e5484d;
+}
+
+.asg-status-pill.status-done {
+  background: rgba(46, 204, 113, 0.14);
+  color: #1e8449;
+}
+
+.asg-modal-note {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #565f70;
+  margin: 0 0 20px;
+}
+
+.asg-modal-btn {
+  width: 100%;
+  justify-content: center;
+  background: #f2a83e;
+  border: none;
+  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.asg-modal-btn:hover {
+  background: #d98e2c;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
+  .assignments-card {
+    padding: 12px 16px 24px;
+  }
+  .asg-tabs {
+    gap: 16px;
+  }
+  .asg-select-wrap {
+    width: 100%;
+  }
+}

@@ -19,6 +19,8 @@ import {
   ChevronLeft,
 } from "lucide-react";
 import "./Dashboard.css";
+import { ASSIGNMENTS } from "./data/assignments";
+import Assignments from "./Assingment";
 
 /* ----------------------------------------------------------------
    Navigation items
@@ -41,12 +43,6 @@ const STATS = [
   { label: "Cumulative GPA", value: "3.84", note: "+0.12", detail: "Top 5% of your class", icon: Award },
   { label: "Credits completed", value: "78 / 120", note: "Junior", detail: "65% completion rate", icon: Target },
   { label: "Active courses", value: "6 Courses", note: "Fall '26", detail: "18 total weekly hours", icon: BookOpen },
-];
-
-const ASSIGNMENTS = [
-  { title: "Interactive Web App Draft", course: "CS 302 · Human Computer Interaction", due: "Due in 4 Hours", icon: FileText, tone: "danger", weight: 15 },
-  { title: "Linear Regression Problem Set", course: "MATH 221 · Applied Statistics", due: "Due Tomorrow", icon: FileText, tone: "warning", weight: 10 },
-  { title: "Brand Communication Analysis", course: "MKT 315 · Marketing Principles", due: "Due in 5 Days", icon: FileText, tone: "info", weight: 10 },
 ];
 
 const GRADES = [
@@ -183,7 +179,14 @@ function Profile({ name, studentId, onLogout }) {
   );
 }
 
-function Panel({ title, icon: Icon, action, children, className = "" }) {
+function Panel({
+  title,
+  icon: Icon,
+  action,
+  onAction,
+  children,
+  className = "",
+}) {
   return (
     <div className={`dash-panel ${className}`}>
       <div className="dash-panel-header">
@@ -191,12 +194,18 @@ function Panel({ title, icon: Icon, action, children, className = "" }) {
           <Icon size={15} />
           {title}
         </h2>
+
         {action && (
-          <button type="button" className="dash-panel-action">
+          <button
+            type="button"
+            className="dash-panel-action"
+            onClick={onAction}
+          >
             {action}
           </button>
         )}
       </div>
+
       {children}
     </div>
   );
@@ -205,7 +214,10 @@ function Panel({ title, icon: Icon, action, children, className = "" }) {
 /* ----------------------------------------------------------------
    Views
 ------------------------------------------------------------------- */
-function DashboardView() {
+function DashboardView({ onNavigate }) {
+  const upcomingAssignments = ASSIGNMENTS
+  .filter((item) => item.status === "assigned")
+  .slice(0, 3);
   return (
     <>
       <div className="dash-stats">
@@ -232,26 +244,42 @@ function DashboardView() {
 
       <div className="dash-content-grid">
         <div className="dash-col">
-          <Panel title="Assignment Deadlines" icon={CalendarDays} action="View All">
+          <Panel title="Assignment Deadlines" icon={CalendarDays} action="View All" onAction={() => onNavigate("Assignments")}>
             <div className="dash-assignments">
-              {ASSIGNMENTS.map(({ title, course, due, icon: Icon, tone, weight }) => (
-                <button type="button" className="dash-assignment-row" key={title}>
-                  <span className={`dash-assignment-icon ${tone}`}>
-                    <Icon size={16} />
-                  </span>
-                  <span className="dash-assignment-text">
-                    <strong>{title}</strong>
-                    <span>{course}</span>
-                  </span>
-                  <span className={`dash-assignment-due tone-${tone}`}>
-                    <strong>{due}</strong>
-                    <span>Weight: {weight}%</span>
-                  </span>
-                  <ChevronRight size={16} className="dash-assignment-chevron" />
-                </button>
-              ))}
-            </div>
-          </Panel>
+                {upcomingAssignments.map((item) => (
+                  <button
+                    type="button"
+                    className="dash-assignment-row"
+                    key={item.id}
+                    onClick={() => onNavigate("Assignments")}
+                  >
+                    <span className="dash-assignment-icon info">
+                      <FileText size={16} />
+                    </span>
+
+                    <span className="dash-assignment-text">
+                      <strong>{item.title}</strong>
+                      <span>{item.course}</span>
+                    </span>
+
+                    <span className="dash-assignment-due tone-info">
+                      <strong>
+                        {item.due || "No due date"}
+                      </strong>
+
+                      <span>
+                        Weight: {item.weight || 0}%
+                      </span>
+                    </span>
+
+                    <ChevronRight
+                      size={16}
+                      className="dash-assignment-chevron"
+                    />
+                  </button>
+                ))}
+              </div>
+            </Panel>
 
           <Panel title="Recent Academic Results" icon={Award} action="Full Transcript">
             <div className="dash-table-scroll">
@@ -466,6 +494,10 @@ export default function Dashboard({
         />
       );
     }
+    if (active === "Assignments"){
+      return <Assignments />;
+    }
+    
     return <PlaceholderView title={active} />;
   };
 
