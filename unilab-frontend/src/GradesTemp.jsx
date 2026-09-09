@@ -109,10 +109,10 @@ export default function Grades() {
       : "—";
   const passed = filtered.filter((g) => g.status === "passed").length;
 
+
   return (
     <div className="grades-shell">
       <div className="grades-header">
-        <h2 className="grades-title">Grades</h2>
         <div className="grades-summary">
           <div className="summary-item">
             <span className="summary-label">Average</span>
