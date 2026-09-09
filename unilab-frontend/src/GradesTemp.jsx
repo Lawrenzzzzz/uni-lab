@@ -109,26 +109,8 @@ export default function Grades() {
       : "—";
   const passed = filtered.filter((g) => g.status === "passed").length;
 
-
   return (
     <div className="grades-shell">
-      <div className="grades-header">
-        <div className="grades-summary">
-          <div className="summary-item">
-            <span className="summary-label">Average</span>
-            <span className="summary-value">{avgGrade}</span>
-          </div>
-          <div className="summary-item">
-            <span className="summary-label">Passed</span>
-            <span className="summary-value">{passed}</span>
-          </div>
-          <div className="summary-item">
-            <span className="summary-label">Total Units</span>
-            <span className="summary-value">{totalUnits}</span>
-          </div>
-        </div>
-      </div>
-
       <div className="grades-card">
         <div className="grades-toolbar">
           <div className="grades-search">
@@ -193,6 +175,24 @@ export default function Grades() {
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* Summary moved to bottom right */}
+        <div className="grades-footer">
+          <div className="grades-summary">
+            <div className="summary-item">
+              <span className="summary-label">Average</span>
+              <span className="summary-value">{avgGrade}</span>
+            </div>
+            <div className="summary-item">
+              <span className="summary-label">Passed</span>
+              <span className="summary-value">{passed}</span>
+            </div>
+            <div className="summary-item">
+              <span className="summary-label">Total Units</span>
+              <span className="summary-value">{totalUnits}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

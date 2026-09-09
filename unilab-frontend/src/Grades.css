@@ -4,7 +4,8 @@
 
 .grades-shell {
   background: transparent;
-  padding: 0;
+  padding: 10px;
+  
 }
 
 .grades-header {
@@ -35,7 +36,7 @@
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
-  color: #94a3b8;
+  color: #000;
   letter-spacing: 0.04em;
 }
 
@@ -196,3 +197,23 @@
     padding-right: 6px;
   }
 }
+
+/* ---------- Footer summary (bottom right) ---------- */
+.grades-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.grades-summary {
+  display: flex;
+  gap: 24px;
+  background: #ffffff;
+  padding: 8px 18px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+}
+
+/* Keep existing summary-item styles – they are already defined */
