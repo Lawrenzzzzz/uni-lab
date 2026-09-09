@@ -20,7 +20,8 @@ import {
 } from "lucide-react";
 import "./Dashboard.css";
 import { ASSIGNMENTS } from "./data/assignments";
-import Assignments from "./Assingment";
+import Assignments from "./Assignment.jsx";     
+import Grades from "./GradesTemp.jsx";         
 
 /* ----------------------------------------------------------------
    Navigation items
@@ -216,8 +217,9 @@ function Panel({
 ------------------------------------------------------------------- */
 function DashboardView({ onNavigate }) {
   const upcomingAssignments = ASSIGNMENTS
-  .filter((item) => item.status === "assigned")
-  .slice(0, 3);
+    .filter((item) => item.status === "assigned")
+    .slice(0, 3);
+
   return (
     <>
       <div className="dash-stats">
@@ -244,42 +246,39 @@ function DashboardView({ onNavigate }) {
 
       <div className="dash-content-grid">
         <div className="dash-col">
-          <Panel title="Assignment Deadlines" icon={CalendarDays} action="View All" onAction={() => onNavigate("Assignments")}>
+          <Panel
+            title="Assignment Deadlines"
+            icon={CalendarDays}
+            action="View All"
+            onAction={() => onNavigate("Assignments")}
+          >
             <div className="dash-assignments">
-                {upcomingAssignments.map((item) => (
-                  <button
-                    type="button"
-                    className="dash-assignment-row"
-                    key={item.id}
-                    onClick={() => onNavigate("Assignments")}
-                  >
-                    <span className="dash-assignment-icon info">
-                      <FileText size={16} />
-                    </span>
+              {upcomingAssignments.map((item) => (
+                <button
+                  type="button"
+                  className="dash-assignment-row"
+                  key={item.id}
+                  onClick={() => onNavigate("Assignments")}
+                >
+                  <span className="dash-assignment-icon info">
+                    <FileText size={16} />
+                  </span>
 
-                    <span className="dash-assignment-text">
-                      <strong>{item.title}</strong>
-                      <span>{item.course}</span>
-                    </span>
+                  <span className="dash-assignment-text">
+                    <strong>{item.title}</strong>
+                    <span>{item.course}</span>
+                  </span>
 
-                    <span className="dash-assignment-due tone-info">
-                      <strong>
-                        {item.due || "No due date"}
-                      </strong>
+                  <span className="dash-assignment-due tone-info">
+                    <strong>{item.due || "No due date"}</strong>
+                    <span>Weight: {item.weight || 0}%</span>
+                  </span>
 
-                      <span>
-                        Weight: {item.weight || 0}%
-                      </span>
-                    </span>
-
-                    <ChevronRight
-                      size={16}
-                      className="dash-assignment-chevron"
-                    />
-                  </button>
-                ))}
-              </div>
-            </Panel>
+                  <ChevronRight size={16} className="dash-assignment-chevron" />
+                </button>
+              ))}
+            </div>
+          </Panel>
 
           <Panel title="Recent Academic Results" icon={Award} action="Full Transcript">
             <div className="dash-table-scroll">
@@ -417,14 +416,11 @@ function ClassesView({ onViewClass, selectedClass, onBack }) {
               <span className={`dash-class-badge ${cls.status.toLowerCase()}`}>{cls.status}</span>
             </div>
             <h3 className="dash-class-title">{cls.title}</h3>
-            
             <div className="dash-class-card-body">
               <span className="dash-label">Academic Year & Semester</span>
               <p className="dash-value">{cls.schoolYear} | {cls.semester}</p>
-
               <span className="dash-label">Instructor</span>
               <p className="dash-value dash-instructor">{cls.instructor}</p>
-
               <span className="dash-label">📅 Schedule Details</span>
               <div className="dash-schedule-list">
                 {cls.schedule.map((slot, idx) => (
@@ -435,7 +431,6 @@ function ClassesView({ onViewClass, selectedClass, onBack }) {
                 ))}
               </div>
             </div>
-
             <button className="dash-btn-view" onClick={() => onViewClass(cls)}>
               View Class
             </button>
@@ -483,8 +478,9 @@ export default function Dashboard({
     closeNav();
   };
 
+  // ★ This is the renderContent function – all conditional logic is here ★
   const renderContent = () => {
-    if (active === "Dashboard") return <DashboardView />;
+    if (active === "Dashboard") return <DashboardView onNavigate={handleNavSelect} />;
     if (active === "Class") {
       return (
         <ClassesView
@@ -494,10 +490,8 @@ export default function Dashboard({
         />
       );
     }
-    if (active === "Assignments"){
-      return <Assignments />;
-    }
-    
+    if (active === "Assignments") return <Assignments />;
+    if (active === "Grades") return <Grades />;   // ← new Grades view
     return <PlaceholderView title={active} />;
   };
 

@@ -11,6 +11,7 @@ import {
 import { ASSIGNMENTS } from "./data/assignments";
 import "./Assignment.css";
 
+
 /* ----------------------------------------------------------------
    Static demo data — swap for a real /api/assignments/ endpoint
    whenever the backend exposes one.
