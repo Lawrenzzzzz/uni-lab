@@ -35,6 +35,8 @@
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 8px;
+  background-color: #FFF;
+
 }
 
 .dash-day-tab {
@@ -43,7 +45,7 @@
   padding: 10px 6px;
   border: 1px solid var(--border, #e5e4e7);
   border-radius: 12px;
-  background: var(--bg, #fff);
+  background: #F7F7F4;
   color: var(--text, #6b6375);
   cursor: pointer;
   transition: 0.18s ease;
@@ -58,7 +60,7 @@
   display: block;
   font-size: 15px;
   font-weight: 800;
-  color: var(--text-h, #08060d);
+  color: #000;
 }
 
 .dash-day-tab small {
@@ -68,13 +70,14 @@
 }
 
 .dash-day-tab.active {
-  background: var(--text-h, #08060d);
+  background: #F2A83E;
   border-color: var(--text-h, #08060d);
+  border-color: #000;
 }
 
 .dash-day-tab.active > span,
 .dash-day-tab.active small {
-  color: #fff;
+  color: #000;
 }
 
 .dash-day-tab i {
