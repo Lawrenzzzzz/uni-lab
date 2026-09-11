@@ -23,6 +23,7 @@ import { ASSIGNMENTS } from "./data/assignments";
 import Assignments from "./Assignment.jsx";     
 import Grades from "./GradesTemp.jsx";
 import Schedule from "./Schedule.jsx";
+import Messages from "./Messages.jsx";
 
 /* ----------------------------------------------------------------
    Navigation items
@@ -495,6 +496,7 @@ export default function Dashboard({
     if (active === "Assignments") return <Assignments />;
     if (active === "Grades") return <Grades />;   // ← new Grades view
     if (active === "Schedule") return <Schedule classes={CLASSES} />;
+    if (active === "Messages") return <Messages />;
     return <PlaceholderView title={active} />;
   };
 
