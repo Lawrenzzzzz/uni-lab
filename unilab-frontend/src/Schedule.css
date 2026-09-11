@@ -23,10 +23,11 @@
 
 .dash-schedule-term {
   padding: 8px 12px;
-  border: 1px solid var(--border, #e5e4e7);
+  border: 1px solid;
+  border-color: #000;
   border-radius: 10px;
-  background: var(--bg, #fff);
-  color: var(--text, #6b6375);
+  background: #FFF;
+  color: #000;
   font-size: 12px;
   white-space: nowrap;
 }
@@ -88,6 +89,7 @@
   height: 5px;
   transform: translateX(-50%);
   border-radius: 50%;
+  color: #000;
   background: currentColor;
 }
 
@@ -106,21 +108,24 @@
 }
 
 .dash-schedule-day-header svg {
-  color: var(--text, #6b6375);
+  color: #000;
 }
 
 .dash-schedule-day-label {
-  font-size: 12px;
+  font-size: 20px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--text, #6b6375);
+  color: #000;
+
 }
 
 .dash-schedule-day-header h3 {
   margin: 3px 0 0;
   font-size: 18px;
-  color: var(--text-h, #08060d);
+  color: #000;
+  text-align: left;
+
 }
 
 .dash-schedule-timeline {
