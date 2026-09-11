@@ -50,7 +50,6 @@ export default function Schedule({ classes = [] }) {
     <div className="dash-schedule-page">
       <div className="dash-schedule-toolbar">
         <div>
-          <h2>Weekly Schedule</h2>
           <p>Your classes for the current semester.</p>
         </div>
         <span className="dash-schedule-term">2026–2027 · First Semester</span>
