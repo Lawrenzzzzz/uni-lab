@@ -21,7 +21,8 @@ import {
 import "./Dashboard.css";
 import { ASSIGNMENTS } from "./data/assignments";
 import Assignments from "./Assignment.jsx";     
-import Grades from "./GradesTemp.jsx";         
+import Grades from "./GradesTemp.jsx";
+import Schedule from "./Schedule.jsx";
 
 /* ----------------------------------------------------------------
    Navigation items
@@ -441,6 +442,7 @@ function ClassesView({ onViewClass, selectedClass, onBack }) {
   );
 }
 
+
 function PlaceholderView({ title }) {
   return (
     <div className="dash-placeholder">
@@ -492,6 +494,7 @@ export default function Dashboard({
     }
     if (active === "Assignments") return <Assignments />;
     if (active === "Grades") return <Grades />;   // ← new Grades view
+    if (active === "Schedule") return <Schedule classes={CLASSES} />;
     return <PlaceholderView title={active} />;
   };
 

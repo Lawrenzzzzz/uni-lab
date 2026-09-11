@@ -1,0 +1,266 @@
+
+/* Schedule feature */
+.dash-schedule-page {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.dash-schedule-toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.dash-schedule-toolbar h2 {
+  margin: 0;
+  font-size: 22px;
+  color: var(--text-h, #08060d);
+}
+
+.dash-schedule-toolbar p {
+  margin: 5px 0 0;
+  color: var(--text, #6b6375);
+  font-size: 13px;
+}
+
+.dash-schedule-term {
+  padding: 8px 12px;
+  border: 1px solid var(--border, #e5e4e7);
+  border-radius: 10px;
+  background: var(--bg, #fff);
+  color: var(--text, #6b6375);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.dash-day-tabs {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.dash-day-tab {
+  position: relative;
+  min-height: 70px;
+  padding: 10px 6px;
+  border: 1px solid var(--border, #e5e4e7);
+  border-radius: 12px;
+  background: var(--bg, #fff);
+  color: var(--text, #6b6375);
+  cursor: pointer;
+  transition: 0.18s ease;
+}
+
+.dash-day-tab:hover {
+  transform: translateY(-1px);
+  border-color: #cfcbd5;
+}
+
+.dash-day-tab > span {
+  display: block;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-h, #08060d);
+}
+
+.dash-day-tab small {
+  display: block;
+  margin-top: 3px;
+  font-size: 10px;
+}
+
+.dash-day-tab.active {
+  background: var(--text-h, #08060d);
+  border-color: var(--text-h, #08060d);
+}
+
+.dash-day-tab.active > span,
+.dash-day-tab.active small {
+  color: #fff;
+}
+
+.dash-day-tab i {
+  position: absolute;
+  left: 50%;
+  bottom: 6px;
+  width: 5px;
+  height: 5px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.dash-schedule-day-card {
+  padding: 20px;
+  border: 1px solid var(--border, #e5e4e7);
+  border-radius: 16px;
+  background: var(--bg, #fff);
+}
+
+.dash-schedule-day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.dash-schedule-day-header svg {
+  color: var(--text, #6b6375);
+}
+
+.dash-schedule-day-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text, #6b6375);
+}
+
+.dash-schedule-day-header h3 {
+  margin: 3px 0 0;
+  font-size: 18px;
+  color: var(--text-h, #08060d);
+}
+
+.dash-schedule-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dash-schedule-card {
+  display: grid;
+  grid-template-columns: 105px 1fr;
+  min-height: 105px;
+  overflow: hidden;
+  border: 1px solid var(--border, #e5e4e7);
+  border-radius: 14px;
+  background: #fafafa;
+}
+
+.dash-schedule-card-time {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 16px;
+  background: #f1f0f2;
+  border-right: 1px solid var(--border, #e5e4e7);
+}
+
+.dash-schedule-card-time strong {
+  font-size: 15px;
+  color: var(--text-h, #08060d);
+}
+
+.dash-schedule-card-time span {
+  font-size: 12px;
+  color: var(--text, #6b6375);
+}
+
+.dash-schedule-card-body {
+  padding: 16px 18px;
+}
+
+.dash-schedule-code {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #5e5965;
+}
+
+.dash-schedule-card-body h4 {
+  margin: 5px 0 4px;
+  font-size: 17px;
+  color: var(--text-h, #08060d);
+}
+
+.dash-schedule-card-body p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text, #6b6375);
+}
+
+.dash-schedule-card.card-blue {
+  border-left: 4px solid #6c8ff5;
+}
+
+.dash-schedule-card.card-green {
+  border-left: 4px solid #63ab85;
+}
+
+.dash-schedule-card.card-amber {
+  border-left: 4px solid #d8a24c;
+}
+
+.dash-schedule-empty {
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px dashed var(--border, #e5e4e7);
+  border-radius: 12px;
+  color: var(--text, #6b6375);
+  text-align: center;
+}
+
+.dash-schedule-empty svg {
+  margin-bottom: 4px;
+}
+
+.dash-schedule-empty strong {
+  color: var(--text-h, #08060d);
+}
+
+.dash-schedule-empty span {
+  font-size: 12px;
+}
+
+@media (max-width: 760px) {
+  .dash-schedule-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .dash-schedule-term {
+    width: fit-content;
+  }
+
+  .dash-day-tabs {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .dash-schedule-card {
+    grid-template-columns: 85px 1fr;
+  }
+
+  .dash-schedule-card-time {
+    padding: 12px;
+  }
+
+  .dash-schedule-card-body {
+    padding: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dash-day-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dash-schedule-card {
+    grid-template-columns: 1fr;
+  }
+
+  .dash-schedule-card-time {
+    border-right: 0;
+    border-bottom: 1px solid var(--border, #e5e4e7);
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}
